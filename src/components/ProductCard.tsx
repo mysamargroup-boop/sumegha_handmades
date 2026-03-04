@@ -33,7 +33,7 @@ export function ProductCard({ product }: ProductCardProps) {
     : 0;
 
   return (
-    <div className="group flex flex-col gap-3 bg-white p-2 rounded-xl shadow-sm hover:shadow-md transition-all duration-300 border border-primary/5 w-full">
+    <div className="group flex flex-col gap-3 bg-white p-2 rounded-xl shadow-sm hover:shadow-md hover:bg-primary/5 transition-all duration-300 border border-primary/5 w-full">
       <Link href={`/products/${product.id}`} className="block">
         <div className="relative w-full aspect-square bg-gray-50 rounded-lg overflow-hidden">
           <Image
@@ -90,7 +90,7 @@ export function ProductCard({ product }: ProductCardProps) {
           <div className="flex items-center gap-2">
             <p className="text-primary text-[14px] font-black">₹{product.price}</p>
             {product.originalPrice && (
-              <p className="text-muted-foreground text-[10px] line-through decoration-primary/20 font-light">₹{product.originalPrice}</p>
+              <p className="text-muted-foreground text-[10px] line-through decoration-primary/20 font-bold">₹{product.originalPrice}</p>
             )}
           </div>
         </div>

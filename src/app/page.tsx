@@ -140,10 +140,10 @@ export default function Home() {
                         {slide.badge}
                       </div>
                       <div className="space-y-1">
-                        <h1 className="text-3xl sm:text-6xl font-black leading-none uppercase tracking-tighter text-white">
+                        <h1 className="text-2xl sm:text-6xl font-black leading-none uppercase tracking-tighter text-white">
                           {slide.title}
                         </h1>
-                        <h2 className="text-3xl sm:text-6xl font-black leading-none uppercase tracking-tighter text-primary">
+                        <h2 className="text-2xl sm:text-6xl font-black leading-none uppercase tracking-tighter text-primary">
                           {slide.highlight}
                         </h2>
                       </div>
@@ -192,7 +192,7 @@ export default function Home() {
           <div className="flex items-center gap-4 overflow-x-auto pb-4 scrollbar-hide -mx-4 px-4 sm:mx-0 sm:px-0">
             {categories.map((cat, index) => (
               <Link key={index} href={`/products?category=${cat.name}`} className="group block shrink-0 text-center space-y-2 w-28 sm:w-40">
-                <div className="relative aspect-square rounded-xl overflow-hidden border-2 border-white shadow-sm transition-all duration-500 group-hover:scale-105">
+                <div className="relative aspect-square rounded-xl overflow-hidden border-2 border-white shadow-sm transition-all duration-500 group-hover:scale-105 group-hover:bg-primary/5">
                   <Image 
                     src={cat.image} 
                     alt={cat.name} 
@@ -240,7 +240,7 @@ export default function Home() {
             <Carousel opts={{ align: "start", loop: true }} className="w-full">
               <CarouselContent className="-ml-3">
                 {products.slice(0, 6).map((product) => (
-                  <CarouselItem key={product.id} className="pl-3 basis-[70%] sm:basis-1/2 lg:basis-1/4">
+                  <CarouselItem key={product.id} className="pl-3 basis-[70%] sm:basis-1/2 md:basis-1/3 lg:basis-1/4">
                     <ProductCard product={product} />
                   </CarouselItem>
                 ))}
@@ -262,12 +262,12 @@ export default function Home() {
               const Icon = step.icon;
               return (
                 <div key={idx} className="flex flex-col items-center text-center space-y-3 group">
-                  <div className="w-12 h-12 sm:w-20 sm:h-20 rounded-full bg-white shadow-md border border-primary/5 flex items-center justify-center transition-all duration-300 group-hover:scale-110">
-                    <Icon className="h-5 w-5 sm:h-8 sm:w-8 text-primary stroke-[1.5px]" />
+                  <div className="w-12 h-12 sm:w-16 sm:h-16 rounded-full bg-white shadow-md border border-primary/5 flex items-center justify-center transition-all duration-300 group-hover:scale-110 group-hover:bg-primary/5">
+                    <Icon className="h-4 w-4 sm:h-6 sm:w-6 text-primary stroke-[1.5px]" />
                   </div>
                   <div className="space-y-1">
-                    <h5 className="font-black text-[9px] sm:text-base uppercase tracking-widest text-foreground">{step.title}</h5>
-                    <p className="text-foreground/40 text-[8px] sm:text-xs font-light leading-tight">{step.desc}</p>
+                    <h5 className="font-black text-[9px] sm:text-xs uppercase tracking-widest text-foreground">{step.title}</h5>
+                    <p className="text-foreground/40 text-[8px] sm:text-[10px] font-light leading-tight">{step.desc}</p>
                   </div>
                 </div>
               );
@@ -278,7 +278,7 @@ export default function Home() {
 
       <section className="py-16">
         <div className="container-normal px-4">
-          <div className="bg-charcoal text-white p-10 lg:p-20 rounded-[2.5rem] text-center space-y-6 relative overflow-hidden shadow-2xl">
+          <div className="bg-[#181113] text-white p-10 lg:p-20 rounded-[2.5rem] text-center space-y-6 relative overflow-hidden shadow-2xl">
             <div className="space-y-3">
               <div className="inline-block px-3 py-1 rounded-full bg-white/10 border border-white/20 text-[8px] font-bold uppercase tracking-[0.3em]">
                 AI Powered Concierge

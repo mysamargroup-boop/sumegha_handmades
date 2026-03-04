@@ -1,4 +1,3 @@
-
 "use client";
 
 import Link from 'next/link';
@@ -59,12 +58,12 @@ export function Footer() {
   const contactItems = [
     { label: "EMAIL US", value: "hello@sumegha.com", icon: Mail },
     { label: "CALL US", value: "+91 98765 43210", icon: Phone },
-    { label: "OUR STUDIO", value: "Art District, Mumbai", icon: MapPin },
+    { label: "OUR STUDIO", value: "Makronia, Sagar Madhya Pradesh 470002", icon: MapPin },
   ];
 
   return (
     <footer className="bg-[#181113] text-white rounded-t-[3rem] lg:rounded-t-[4rem] pt-16 lg:pt-20 pb-12">
-      <div className="container-normal">
+      <div className="container-normal pl-8 lg:pl-12">
         <div className="flex flex-col lg:flex-row items-center lg:items-start justify-between gap-12 lg:gap-16 mb-16 lg:mb-20">
           <div className="text-center lg:text-left space-y-6 lg:space-y-8 max-w-md w-full">
             <h3 className="text-lg lg:text-3xl font-black uppercase tracking-[0.3em] lg:tracking-[0.4em] text-white">Join the Inner Circle</h3>
@@ -102,8 +101,8 @@ export function Footer() {
               </Link>
             </div>
 
-            {/* Contact Details Section - Styled to match screenshot */}
-            <div className="flex flex-col items-start lg:items-end gap-10 w-full lg:w-auto px-4 lg:px-0">
+            {/* Contact Details Section - 3 Columns on Tablet/Desktop */}
+            <div className="grid grid-cols-1 md:grid-cols-3 lg:flex lg:flex-col items-start lg:items-end gap-10 w-full lg:w-auto px-4 lg:px-0">
               {contactItems.map((item, idx) => {
                 const Icon = item.icon;
                 return (

@@ -5,7 +5,7 @@ import { useState, useMemo, useEffect, useRef } from 'react';
 import { ProductCard } from '@/components/ProductCard';
 import { PlaceHolderImages } from '@/lib/placeholder-images';
 import { Button } from '@/components/ui/button';
-import { Search, SlidersHorizontal } from 'lucide-react';
+import { Search } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
 export default function ProductsPage() {
@@ -48,7 +48,7 @@ export default function ProductsPage() {
       <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-8">
         <div className="text-center md:text-left space-y-2">
           <p className="text-[11px] font-bold uppercase tracking-[0.5em] text-primary">The Collection</p>
-          <h1 className="text-3xl lg:text-6xl font-black font-headline uppercase tracking-tight">Art Gallery</h1>
+          <h1 className="text-2xl lg:text-6xl font-black font-headline uppercase tracking-tight">Art Gallery</h1>
           <p className="text-muted-foreground text-sm lg:text-lg max-w-md font-light">Hand-picked treasures waiting for a home.</p>
         </div>
         
@@ -72,7 +72,7 @@ export default function ProductsPage() {
                   "rounded-full h-10 px-6 text-[10px] font-bold uppercase tracking-widest transition-all shrink-0",
                   selectedCategory === cat 
                     ? "gradient-primary border-none shadow-lg shadow-primary/20" 
-                    : "border-primary/10 bg-white/50 hover:bg-white"
+                    : "border-primary/10 bg-white/50 hover:bg-primary/5"
                 )}
                 onClick={() => setSelectedCategory(cat)}
               >
@@ -84,7 +84,7 @@ export default function ProductsPage() {
       </div>
 
       {filteredProducts.length > 0 ? (
-        <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-10">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-10">
           {filteredProducts.map(product => (
             <ProductCard key={product.id} product={product} />
           ))}

@@ -106,6 +106,13 @@ export default function ProductDetailPage({ params }: { params: Promise<{ id: st
     `https://picsum.photos/seed/${product.id}3/800/1000`
   ];
 
+  const specifications = [
+    { label: "Dimensions", value: "12 x 12 inches" },
+    { label: "Weight", value: "850 grams" },
+    { label: "Material", value: "Handcrafted Ceramic / Clay" },
+    { label: "Finish", value: "Glossy Protective Coat" }
+  ];
+
   return (
     <div className="w-full overflow-x-hidden">
       <div className="container mx-auto px-4 py-8 lg:py-12 max-w-7xl">
@@ -147,19 +154,45 @@ export default function ProductDetailPage({ params }: { params: Promise<{ id: st
 
           <div className="space-y-6 lg:space-y-8 w-full">
             <div className="space-y-3">
-              <div className="flex items-center space-x-2">
-                <Badge className="bg-primary/10 text-primary border-none px-3 py-1 rounded-full uppercase tracking-widest text-[9px] font-black">{product.category}</Badge>
-                <div className="flex text-amber-400">
-                  {[1, 2, 3, 4, 5].map(s => <Star key={s} className="h-3 w-3 fill-current" />)}
+              <div className="flex items-center justify-between">
+                <div className="flex items-center space-x-2">
+                  <Badge className="bg-primary/10 text-primary border-none px-3 py-1 rounded-full uppercase tracking-widest text-[9px] font-black">{product.category}</Badge>
+                  <div className="flex text-amber-400">
+                    {[1, 2, 3, 4, 5].map(s => <Star key={s} className="h-3 w-3 fill-current" />)}
+                  </div>
+                  <span className="text-[10px] font-bold text-muted-foreground">(24)</span>
                 </div>
-                <span className="text-[10px] font-bold text-muted-foreground">(24 reviews)</span>
+                
+                {/* Desktop Utility Icons */}
+                <div className="hidden lg:flex items-center gap-2">
+                  <Button size="icon" variant="outline" className={cn("h-10 w-10 rounded-full border-primary/10 transition-all", wishlisted ? 'bg-primary/10 text-primary border-primary/20' : 'bg-white hover:bg-primary/5')} onClick={() => wishlisted ? removeFromWishlist(product.id) : addToWishlist(product)}>
+                    <Heart className={cn("h-4 w-4", wishlisted && "fill-primary")} />
+                  </Button>
+                  <Button size="icon" variant="outline" className="h-10 w-10 rounded-full border-primary/10 bg-white hover:bg-primary/5 transition-all" onClick={handleShare}>
+                    <Share2 className="h-4 w-4" />
+                  </Button>
+                </div>
               </div>
-              <h1 className="text-2xl lg:text-5xl font-black font-headline tracking-tight uppercase leading-tight text-foreground">
-                {product.name}
-              </h1>
+
+              <div className="flex items-center justify-between lg:block">
+                <h1 className="text-2xl lg:text-5xl font-black font-headline tracking-tight uppercase leading-tight text-foreground max-w-[70%] lg:max-w-none">
+                  {product.name}
+                </h1>
+                
+                {/* Mobile Icons next to title */}
+                <div className="flex lg:hidden items-center gap-2">
+                  <Button size="icon" variant="outline" className={cn("h-9 w-9 rounded-full border-primary/10 transition-all", wishlisted ? 'bg-primary/10 text-primary border-primary/20' : 'bg-white hover:bg-primary/5')} onClick={() => wishlisted ? removeFromWishlist(product.id) : addToWishlist(product)}>
+                    <Heart className={cn("h-4 w-4", wishlisted && "fill-primary")} />
+                  </Button>
+                  <Button size="icon" variant="outline" className="h-9 w-9 rounded-full border-primary/10 bg-white hover:bg-primary/5 transition-all" onClick={handleShare}>
+                    <Share2 className="h-4 w-4" />
+                  </Button>
+                </div>
+              </div>
+
               <div className="flex items-center gap-4">
                 <p className="text-3xl lg:text-5xl font-black font-headline text-primary">₹{product.price}</p>
-                <p className="text-xl lg:text-2xl text-muted-foreground line-through decoration-primary/30 font-light italic">₹{product.originalPrice}</p>
+                <p className="text-xl lg:text-2xl text-muted-foreground line-through decoration-primary/30 font-bold">₹{product.originalPrice}</p>
               </div>
             </div>
 
@@ -168,9 +201,18 @@ export default function ProductDetailPage({ params }: { params: Promise<{ id: st
                 <Sparkles className="h-4 w-4 mr-2 text-primary" />
                 Artist's Story & Details
               </h3>
-              <p className="text-sm lg:text-base leading-relaxed text-muted-foreground italic">
-                {product.description}
+              <p className="text-sm lg:text-base leading-relaxed text-muted-foreground">
+                {product.description}. This unique piece is meticulously handcrafted using traditional techniques passed down through generations. Every stroke of paint and every mirror placement is done by hand, ensuring that you receive a one-of-a-kind masterpiece for your collection.
               </p>
+            </div>
+
+            <div className="grid grid-cols-2 gap-4 lg:gap-6">
+              {specifications.map((spec, i) => (
+                <div key={i} className="space-y-1">
+                  <p className="text-[10px] font-bold text-muted-foreground uppercase tracking-widest">{spec.label}</p>
+                  <p className="text-sm font-bold text-foreground">{spec.value}</p>
+                </div>
+              ))}
             </div>
 
             <div className="space-y-4 w-full">
@@ -194,46 +236,25 @@ export default function ProductDetailPage({ params }: { params: Promise<{ id: st
                 </Button>
               </div>
 
-              <div className="flex items-center gap-3 pt-2 w-full">
-                <Button 
-                  size="icon" 
-                  variant="outline" 
-                  className={cn(
-                    "h-10 w-10 sm:h-12 sm:w-12 rounded-full border-primary/10 transition-all shrink-0",
-                    wishlisted ? 'bg-primary/10 text-primary border-primary/20' : 'bg-white hover:bg-primary/5'
-                  )} 
-                  onClick={() => wishlisted ? removeFromWishlist(product.id) : addToWishlist(product)}
-                >
-                  <Heart className={cn("h-4 w-4 sm:h-5 sm:w-5", wishlisted && "fill-primary")} />
-                </Button>
-                <Button 
-                  size="icon" 
-                  variant="outline" 
-                  className="h-10 w-10 sm:h-12 sm:w-12 rounded-full border-primary/10 bg-white hover:bg-primary/5 transition-all shrink-0" 
-                  onClick={handleShare}
-                >
-                  <Share2 className="h-4 w-4 sm:h-5 sm:w-5" />
-                </Button>
-                <Button 
-                  size="icon" 
-                  variant="outline" 
-                  className="h-10 w-10 sm:h-12 sm:w-12 rounded-full border-primary/10 bg-white hover:bg-green-50 text-foreground transition-all shrink-0" 
-                  onClick={handleWhatsAppShare}
-                >
-                  <WhatsAppIcon className="h-4 w-4 sm:h-5 sm:w-5" />
-                </Button>
-              </div>
+              <Button 
+                variant="outline" 
+                className="w-full h-12 rounded-2xl border-green-100 bg-green-50/30 hover:bg-green-50 text-green-700 font-bold text-[11px] uppercase tracking-widest gap-2" 
+                onClick={handleWhatsAppShare}
+              >
+                <WhatsAppIcon className="h-4 w-4" />
+                Inquire via WhatsApp
+              </Button>
             </div>
           </div>
         </div>
 
         {recommendedProducts.length > 0 && (
           <div className="space-y-10">
-            <div className="text-center md:text-left">
+            <div className="text-center lg:text-left">
               <h4 className="text-[10px] font-bold uppercase tracking-[0.5em] text-primary mb-2">You May Also Like</h4>
               <h2 className="text-2xl lg:text-5xl font-black font-headline tracking-tight uppercase">Recommended Pieces</h2>
             </div>
-            <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-10">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-10">
               {recommendedProducts.map(p => (
                 <ProductCard key={p.id} product={p} />
               ))}
