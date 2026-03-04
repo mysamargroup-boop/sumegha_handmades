@@ -64,7 +64,7 @@ export function Footer() {
 
   return (
     <footer className="bg-[#181113] text-white rounded-t-[3rem] lg:rounded-t-[4rem] pt-16 lg:pt-20 pb-12">
-      <div className="container-normal pl-8 lg:pl-16">
+      <div className="container-normal px-8 lg:px-24">
         <div className="flex flex-col lg:flex-row items-center lg:items-start justify-between gap-12 lg:gap-16 mb-16 lg:mb-20">
           <div className="text-center lg:text-left space-y-6 lg:space-y-8 max-w-md w-full">
             <h3 className="text-lg lg:text-3xl font-black uppercase tracking-[0.3em] lg:tracking-[0.4em] text-white">Join the Inner Circle</h3>
@@ -121,7 +121,7 @@ export function Footer() {
           </div>
         </div>
         
-        <div className="hidden md:grid md:grid-cols-4 gap-12 py-12 border-t border-white/5 text-[10px] font-bold uppercase tracking-[0.3em] text-white/70">
+        <div className="hidden md:grid md:grid-cols-4 gap-12 py-12 border-t border-white/5 text-[10px] font-bold uppercase tracking-[0.3em] text-white/70 lg:pl-12">
           {footerData.map((section) => (
             <div key={section.title} className="space-y-6">
               <h4 className="text-white/30 text-[9px] tracking-[0.5em] mb-4">{section.title}</h4>
