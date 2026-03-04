@@ -39,10 +39,10 @@ export function BottomNav() {
         </div>
 
         {/* Central Raised Button */}
-        <div className="absolute -top-10 left-1/2 -translate-x-1/2">
+        <div className="absolute -top-8 left-1/2 -translate-x-1/2">
           <Link href="/discovery">
-            <div className="size-20 rounded-full bg-[#065f46] border-[6px] border-[#FFF1EB] shadow-xl flex items-center justify-center group active:scale-95 transition-transform duration-200">
-              <Gem className="h-9 w-9 text-[#fbbf24] fill-[#fbbf24] drop-shadow-md" />
+            <div className="size-16 rounded-full bg-[#065f46] border-[4px] border-[#FFF1EB] shadow-xl flex items-center justify-center group active:scale-95 transition-transform duration-200">
+              <Gem className="h-7 w-7 text-[#fbbf24] fill-[#fbbf24] drop-shadow-md" />
             </div>
           </Link>
         </div>
