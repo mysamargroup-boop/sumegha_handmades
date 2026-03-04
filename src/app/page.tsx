@@ -102,28 +102,28 @@ export default function Home() {
 
   const heroSlides = [
     {
-      badge: "EXCLUSIVE COLLECTION",
+      badge: "BESPOKE DOOR DECOR",
       title: "CUSTOM",
       highlight: "NAME PLATES",
       categoryName: "Custom Name Plates",
       desc: "Artisanal door decor personalized for your beautiful home. Experience contemporary design through bespoke handmade elegance.",
-      image: "https://picsum.photos/seed/art-bg/1920/1080",
+      image: "https://picsum.photos/seed/art-nameplates/1920/1080",
     },
     {
-      badge: "TRADITIONAL MOTIFS",
+      badge: "TRADITIONAL SPIRITUALITY",
       title: "SHUBH",
       highlight: "SYMBOLS",
       categoryName: "Shubh Symbols",
-      desc: "Traditional auspicious motifs to bring positive energy. Each piece is meticulously handcrafted with love.",
-      image: "https://picsum.photos/seed/jewelry-bg/1920/1080",
+      desc: "Traditional auspicious motifs to bring positive energy. Each piece is meticulously handcrafted with love and devotion.",
+      image: "https://picsum.photos/seed/spiritual-art/1920/1080",
     },
     {
       badge: "VERTICAL TREASURES",
       title: "DECORATIVE",
       highlight: "HANGINGS",
       categoryName: "Decorative Hangings",
-      desc: "Bespoke ensembles for your vertical spaces. Celebrate traditions with our vibrant range of festive decor.",
-      image: "https://picsum.photos/seed/festive-bg/1920/1080",
+      desc: "Bespoke ensembles for your vertical spaces. Celebrate traditions with our vibrant range of festive wall and door decor.",
+      image: "https://picsum.photos/seed/wall-art-hangings/1920/1080",
     }
   ];
 
@@ -175,7 +175,7 @@ export default function Home() {
                       </p>
                       <Link href={`/products?category=${encodeURIComponent(slide.categoryName)}`} className="pt-4">
                         <Button className="h-14 px-12 rounded-xl text-[10px] font-bold uppercase tracking-widest gradient-primary border-none shadow-xl shadow-primary/40 active:scale-95 transition-all">
-                          Shop Now
+                          Shop {slide.highlight}
                         </Button>
                       </Link>
                     </div>
