@@ -1,8 +1,7 @@
-
 "use client";
 
 import Link from 'next/link';
-import { Instagram, Facebook, Twitter, Youtube } from 'lucide-react';
+import { Instagram, Facebook, Twitter, Youtube, Mail, Phone, MapPin } from 'lucide-react';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import {
@@ -56,51 +55,76 @@ export function Footer() {
   ];
 
   return (
-    <footer className="bg-foreground text-white rounded-t-[4rem] pt-32 pb-16">
+    <footer className="bg-foreground text-white rounded-t-[3rem] pt-16 pb-12">
       <div className="container-normal">
-        <div className="flex flex-col lg:flex-row items-center lg:items-start justify-between gap-16 mb-24">
-          <div className="text-center lg:text-left space-y-8 max-w-md">
-            <h3 className="text-2xl font-black uppercase tracking-[0.4em] text-white">Join the Inner Circle</h3>
-            <p className="text-white/60 text-sm font-light tracking-wide leading-relaxed uppercase">
-              Be the first to experience new collections, limited drops, and exclusive art releases.
+        <div className="flex flex-col lg:flex-row items-center lg:items-start justify-between gap-12 mb-16">
+          <div className="text-center lg:text-left space-y-6 max-w-md">
+            <h3 className="text-lg lg:text-2xl font-black uppercase tracking-[0.4em] text-white">Join the Inner Circle</h3>
+            <p className="text-white/50 text-[10px] font-light tracking-wide leading-relaxed uppercase">
+              Experience new collections, limited drops, and exclusive releases.
             </p>
-            <div className="flex flex-col sm:flex-row w-full gap-3 mt-8">
+            <div className="flex flex-col sm:flex-row w-full gap-3 mt-6">
               <Input 
-                className="bg-white/5 border-white/10 text-white placeholder:text-white/40 text-xs font-display tracking-widest uppercase h-14 rounded-xl flex-grow px-6 border focus:ring-primary/50" 
+                className="bg-white/5 border-white/10 text-white placeholder:text-white/40 text-[10px] font-display tracking-widest uppercase h-12 rounded-xl flex-grow px-6 border focus:ring-primary/50" 
                 placeholder="Email Address"
                 type="email"
               />
-              <Button className="h-14 px-10 rounded-xl text-xs font-bold uppercase tracking-[0.3em] gradient-primary transition-all text-white border-none shadow-none">
+              <Button className="h-12 px-8 rounded-xl text-[10px] font-bold uppercase tracking-[0.3em] gradient-primary transition-all text-white border-none shadow-none">
                 Subscribe
               </Button>
             </div>
           </div>
           
-          <div className="flex flex-wrap justify-center gap-8 items-center">
+          <div className="flex flex-wrap justify-center gap-6 items-center">
             <Link href="#" className="text-white/40 hover:text-primary transition-all hover:scale-110">
-              <Instagram className="h-7 w-7" />
+              <Instagram className="h-6 w-6" />
             </Link>
             <Link href="#" className="text-white/40 hover:text-blue-500 transition-all hover:scale-110">
-              <Facebook className="h-7 w-7" />
+              <Facebook className="h-6 w-6" />
             </Link>
             <Link href="#" className="text-white/40 hover:text-sky-400 transition-all hover:scale-110">
-              <Twitter className="h-7 w-7" />
+              <Twitter className="h-6 w-6" />
             </Link>
             <Link href="#" className="text-white/40 hover:text-red-500 transition-all hover:scale-110">
-              <Youtube className="h-7 w-7" />
+              <Youtube className="h-6 w-6" />
             </Link>
             <Link href="#" className="text-white/40 hover:text-green-500 transition-all hover:scale-110">
-              <WhatsAppIcon className="h-7 w-7" />
+              <WhatsAppIcon className="h-6 w-6" />
             </Link>
           </div>
         </div>
+
+        {/* Contact Info Row */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 py-10 border-t border-white/5 text-center md:text-left">
+          <div className="flex flex-col items-center md:items-start gap-2">
+            <div className="flex items-center gap-2 text-primary">
+              <Mail className="h-4 w-4" />
+              <span className="text-[10px] font-bold uppercase tracking-widest">Email Us</span>
+            </div>
+            <p className="text-white/60 text-xs">hello@sumegha.com</p>
+          </div>
+          <div className="flex flex-col items-center md:items-start gap-2">
+            <div className="flex items-center gap-2 text-primary">
+              <Phone className="h-4 w-4" />
+              <span className="text-[10px] font-bold uppercase tracking-widest">Call Us</span>
+            </div>
+            <p className="text-white/60 text-xs">+91 98765 43210</p>
+          </div>
+          <div className="flex flex-col items-center md:items-start gap-2">
+            <div className="flex items-center gap-2 text-primary">
+              <MapPin className="h-4 w-4" />
+              <span className="text-[10px] font-bold uppercase tracking-widest">Studio</span>
+            </div>
+            <p className="text-white/60 text-xs">Sector 12, Art District, Mumbai</p>
+          </div>
+        </div>
         
-        {/* Desktop View (Grid) */}
-        <div className="hidden md:grid md:grid-cols-4 gap-16 py-16 border-t border-white/10 text-xs font-bold uppercase tracking-widest text-white/80">
+        {/* Desktop Links Grid */}
+        <div className="hidden md:grid md:grid-cols-4 gap-12 py-12 border-t border-white/5 text-[9px] font-bold uppercase tracking-[0.2em] text-white/70">
           {footerData.map((section) => (
             <div key={section.title} className="space-y-6">
-              <h4 className="text-white/40 text-[10px] tracking-[0.4em]">{section.title}</h4>
-              <ul className="space-y-4">
+              <h4 className="text-white/30 text-[8px] tracking-[0.4em] mb-4">{section.title}</h4>
+              <ul className="space-y-3">
                 {section.links.map((link) => (
                   <li key={link.name}>
                     <Link href={link.href} className="hover:text-primary transition-colors">{link.name}</Link>
@@ -111,19 +135,19 @@ export function Footer() {
           ))}
         </div>
 
-        {/* Mobile View (Accordion) */}
-        <div className="md:hidden border-t border-white/10 py-8">
+        {/* Mobile Accordion Links */}
+        <div className="md:hidden border-t border-white/5 py-4">
           <Accordion type="single" collapsible className="w-full">
             {footerData.map((section, idx) => (
               <AccordionItem key={section.title} value={`item-${idx}`} className="border-white/5">
-                <AccordionTrigger className="text-xs font-bold uppercase tracking-widest text-white/80 hover:no-underline py-4">
+                <AccordionTrigger className="text-[10px] font-bold uppercase tracking-widest text-white/70 hover:no-underline py-4">
                   {section.title}
                 </AccordionTrigger>
                 <AccordionContent>
                   <ul className="flex flex-col gap-4 py-2 px-4">
                     {section.links.map((link) => (
                       <li key={link.name}>
-                        <Link href={link.href} className="text-[10px] text-white/60 uppercase tracking-widest hover:text-primary transition-colors">
+                        <Link href={link.href} className="text-[10px] text-white/50 uppercase tracking-widest hover:text-primary transition-colors">
                           {link.name}
                         </Link>
                       </li>
@@ -135,8 +159,8 @@ export function Footer() {
           </Accordion>
         </div>
 
-        <div className="mt-16 pt-10 border-t border-white/5 text-center">
-          <p className="text-[10px] text-white/20 uppercase tracking-[0.5em] font-display font-medium">
+        <div className="mt-8 pt-8 border-t border-white/5 text-center">
+          <p className="text-[9px] text-white/10 uppercase tracking-[0.5em] font-medium">
             © {new Date().getFullYear()} Sumegha Handmades. Curated with Precision.
           </p>
         </div>

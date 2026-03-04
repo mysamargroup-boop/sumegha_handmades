@@ -104,7 +104,7 @@ export default function Home() {
   return (
     <div className="flex flex-col w-full overflow-hidden">
       {/* Hero Slider Section */}
-      <section className="relative w-full h-[70vh] min-h-[500px] overflow-hidden">
+      <section className="relative w-full h-[65vh] min-h-[450px] overflow-hidden">
         <Carousel 
           setApi={setApi}
           plugins={[plugin.current]}
@@ -122,7 +122,7 @@ export default function Home() {
                     priority
                   />
                 </div>
-                <div className="relative z-10 h-full flex items-center justify-center py-12 px-6">
+                <div className="relative z-10 h-full flex items-center justify-center py-10 px-6">
                   <div className="container-normal flex flex-col items-center text-center space-y-6">
                     <div className="inline-block px-4 py-1.5 rounded-full border border-primary/20 text-[8px] font-bold uppercase tracking-[0.3em] text-primary bg-primary/5">
                       {slide.badge}
@@ -135,10 +135,10 @@ export default function Home() {
                         {slide.highlight}
                       </h2>
                     </div>
-                    <p className="text-base lg:text-xl text-foreground/70 font-light max-w-xl mx-auto leading-relaxed">
+                    <p className="text-sm lg:text-lg text-foreground/70 font-light max-w-xl mx-auto leading-relaxed">
                       {slide.desc}
                     </p>
-                    <div className="flex flex-col items-center gap-4 w-full max-w-md mx-auto">
+                    <div className="flex flex-col items-center gap-6 w-full max-w-md mx-auto">
                       <div className="flex flex-col sm:flex-row items-center justify-center gap-3 w-full">
                         <Link href="/products" className="w-full">
                           <Button className="w-full h-12 px-8 rounded-xl text-[10px] font-bold uppercase tracking-widest gradient-primary">
@@ -155,8 +155,8 @@ export default function Home() {
                         </Button>
                       </div>
 
-                      {/* Autoplay Loading Indicators */}
-                      <div className="flex gap-2 z-20 mt-2">
+                      {/* Autoplay Loading Indicators - Positioned below buttons as requested */}
+                      <div className="flex gap-2 z-20">
                         {Array.from({ length: count }).map((_, i) => (
                           <button
                             key={i}
@@ -183,18 +183,18 @@ export default function Home() {
       </section>
 
       {/* Collections Rounded Slider */}
-      <section className="py-12 bg-white/30 backdrop-blur-sm border-b border-white">
+      <section className="py-10 bg-white/30 backdrop-blur-sm border-b border-white">
         <div className="container-normal">
           <div className="flex flex-col items-center text-center gap-2 mb-8">
-            <h4 className="text-[10px] font-bold uppercase tracking-[0.4em] text-primary">Browse</h4>
-            <h2 className="text-2xl lg:text-4xl font-black uppercase tracking-tight">Explore Collections</h2>
+            <h4 className="text-[9px] font-bold uppercase tracking-[0.4em] text-primary">Browse</h4>
+            <h2 className="text-2xl lg:text-3xl font-black uppercase tracking-tight">Explore Collections</h2>
           </div>
-          <Carousel opts={{ align: "start", loop: true }} className="w-full px-4 md:px-0">
+          <Carousel opts={{ align: "start", loop: true }} className="w-full">
             <CarouselContent className="-ml-4">
               {categories.map((cat, index) => (
                 <CarouselItem key={index} className="pl-4 basis-1/3 sm:basis-1/4 md:basis-1/5 lg:basis-1/6">
                   <Link href={`/products?category=${cat.name}`} className="group block text-center space-y-2">
-                    <div className="relative aspect-square rounded-full overflow-hidden border-2 border-white shadow-md transition-all duration-500 group-hover:scale-105 group-hover:border-primary/20 group-hover:shadow-lg">
+                    <div className="relative aspect-square rounded-full overflow-hidden border-2 border-white shadow-md transition-all duration-500 group-hover:scale-105 group-hover:border-primary/20">
                       <Image 
                         src={cat.image} 
                         alt={cat.name} 
@@ -215,19 +215,19 @@ export default function Home() {
       </section>
 
       {/* Featured Works Grid */}
-      <section className="py-16">
+      <section className="py-12">
         <div className="container-normal">
           <div className="flex flex-col md:flex-row md:items-end justify-between mb-8 gap-3 px-2">
             <div className="space-y-1 text-center md:text-left">
-              <h4 className="text-[10px] font-bold uppercase tracking-[0.3em] text-primary">Gallery</h4>
-              <h2 className="text-2xl lg:text-4xl font-black uppercase tracking-tight text-foreground">Featured Works</h2>
+              <h4 className="text-[9px] font-bold uppercase tracking-[0.3em] text-primary">Gallery</h4>
+              <h2 className="text-2xl lg:text-3xl font-black uppercase tracking-tight text-foreground">Featured Works</h2>
             </div>
-            <Link href="/products" className="text-foreground text-[10px] font-bold uppercase tracking-[0.2em] border-b border-primary/20 pb-0.5 hover:border-primary transition-all">
+            <Link href="/products" className="text-foreground text-[9px] font-bold uppercase tracking-[0.2em] border-b border-primary/20 pb-0.5 hover:border-primary transition-all">
               See All Gallery
             </Link>
           </div>
           
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4 lg:gap-8">
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4 lg:gap-6">
             {featuredProducts.map((product) => (
               <ProductCard key={product.id} product={product} />
             ))}
@@ -236,11 +236,11 @@ export default function Home() {
       </section>
 
       {/* Trending Slider Section (Second Slider) */}
-      <section className="py-16 bg-white/50 border-y border-white">
+      <section className="py-12 bg-white/50 border-y border-white">
         <div className="container-normal">
           <div className="text-center mb-10 space-y-1">
-            <h4 className="text-[10px] font-bold uppercase tracking-[0.3em] text-primary">Trending Now</h4>
-            <h2 className="text-2xl lg:text-4xl font-black uppercase tracking-tight text-foreground">Most Loved Pieces</h2>
+            <h4 className="text-[9px] font-bold uppercase tracking-[0.3em] text-primary">Trending Now</h4>
+            <h2 className="text-2xl lg:text-3xl font-black uppercase tracking-tight text-foreground">Most Loved Pieces</h2>
           </div>
           <Carousel 
             opts={{ align: "start", loop: true }}
@@ -258,24 +258,24 @@ export default function Home() {
       </section>
 
       {/* Philosophy Section */}
-      <section className="py-16">
+      <section className="py-12">
         <div className="container-normal">
-          <div className="bg-white p-8 lg:p-16 rounded-[2rem] shadow-sm text-center border border-gray-100 space-y-6">
-            <PanelsTopLeft className="h-8 w-8 text-primary/30 mx-auto" />
-            <h4 className="text-[10px] font-bold uppercase tracking-[0.3em] text-primary">The Philosophy</h4>
-            <p className="text-foreground/70 text-base md:text-2xl leading-relaxed font-light italic max-w-3xl mx-auto">
+          <div className="bg-white p-8 lg:p-12 rounded-[2.5rem] shadow-sm text-center border border-gray-100 space-y-4">
+            <PanelsTopLeft className="h-6 w-6 text-primary/30 mx-auto" />
+            <h4 className="text-[9px] font-bold uppercase tracking-[0.3em] text-primary">The Philosophy</h4>
+            <p className="text-foreground/70 text-base md:text-xl leading-relaxed font-light italic max-w-2xl mx-auto">
               "Rooted in contemporary aesthetics and traditional soul, we believe in the power of handmade elements to transform spaces into personal sanctuaries of elegance."
             </p>
-            <div className="w-12 h-[1px] bg-primary/30 mx-auto"></div>
+            <div className="w-10 h-[1px] bg-primary/30 mx-auto mt-4"></div>
           </div>
         </div>
       </section>
 
       {/* Experience Section */}
-      <section className="py-16 bg-secondary/30">
+      <section className="py-12 bg-secondary/30">
         <div className="container-normal">
-          <h4 className="text-[10px] font-bold text-center mb-10 uppercase tracking-[0.5em] text-primary">The Experience</h4>
-          <div className="grid grid-cols-3 gap-4 md:gap-16 lg:gap-24">
+          <h4 className="text-[9px] font-bold text-center mb-8 uppercase tracking-[0.5em] text-primary">The Experience</h4>
+          <div className="grid grid-cols-3 gap-4 md:gap-12">
             {[
               { id: '01', title: "Curate", desc: "Select from our gallery of artisan creations.", icon: MousePointer2 },
               { id: '02', title: "Connect", desc: "Direct consultation via WhatsApp.", icon: WhatsAppIcon },
@@ -283,13 +283,13 @@ export default function Home() {
             ].map((step) => {
               const Icon = step.icon;
               return (
-                <div key={step.id} className="flex flex-col items-center text-center gap-4 group">
-                  <div className="size-10 md:size-16 rounded-xl md:rounded-2xl border border-primary/10 flex items-center justify-center text-[10px] font-black text-primary bg-white shadow-sm group-hover:bg-primary group-hover:text-white transition-all duration-500 group-hover:shadow-lg group-hover:shadow-primary/20">
-                    {typeof Icon === 'string' ? Icon : <Icon className="h-4 w-4 md:h-6 md:w-6 text-primary group-hover:text-white" />}
+                <div key={step.id} className="flex flex-col items-center text-center gap-3 group">
+                  <div className="size-10 md:size-14 rounded-xl border border-primary/10 flex items-center justify-center text-[9px] font-black text-primary bg-white shadow-sm group-hover:bg-primary group-hover:text-white transition-all duration-500">
+                    {typeof Icon === 'string' ? Icon : <Icon className="h-4 w-4 md:h-5 md:w-5 text-primary group-hover:text-white" />}
                   </div>
                   <div className="space-y-1">
-                    <h5 className="font-bold text-[10px] md:text-lg uppercase tracking-widest text-foreground leading-tight">{step.title}</h5>
-                    <p className="text-foreground/60 text-[8px] md:text-xs font-light leading-relaxed max-w-[120px] md:max-w-[240px] mx-auto hidden sm:block">{step.desc}</p>
+                    <h5 className="font-bold text-[9px] md:text-base uppercase tracking-widest text-foreground leading-tight">{step.title}</h5>
+                    <p className="text-foreground/60 text-[8px] md:text-xs font-light leading-relaxed max-w-[120px] mx-auto hidden sm:block">{step.desc}</p>
                   </div>
                 </div>
               );
@@ -299,23 +299,23 @@ export default function Home() {
       </section>
 
       {/* AI Assistant CTA */}
-      <section className="py-16">
+      <section className="py-12">
         <div className="container-normal">
-          <div className="bg-[#181113] text-white p-10 lg:p-20 rounded-[3rem] text-center space-y-8 relative overflow-hidden shadow-2xl">
-            <div className="absolute top-0 right-0 w-48 h-48 opacity-5 -mr-8 -mt-8 pointer-events-none">
+          <div className="bg-[#181113] text-white p-10 lg:p-16 rounded-[3rem] text-center space-y-6 relative overflow-hidden shadow-2xl">
+            <div className="absolute top-0 right-0 w-40 h-40 opacity-5 -mr-8 -mt-8 pointer-events-none">
               <Sparkles className="w-full h-full text-white" />
             </div>
             <div className="space-y-4">
               <div className="inline-block px-3 py-1 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-[8px] font-bold uppercase tracking-[0.3em] text-white">
                 AI Powered
               </div>
-              <h3 className="text-2xl lg:text-5xl font-black uppercase tracking-[0.1em] text-white">Ask the Art Concierge</h3>
-              <p className="text-white/60 text-xs lg:text-base font-light tracking-wide max-w-xl mx-auto leading-relaxed">
+              <h3 className="text-2xl lg:text-4xl font-black uppercase tracking-[0.1em] text-white">Ask the Art Concierge</h3>
+              <p className="text-white/60 text-xs lg:text-sm font-light tracking-wide max-w-lg mx-auto leading-relaxed">
                 Not sure which piece fits your aesthetic? Our AI Assistant can curate a selection based on your unique style.
               </p>
             </div>
             <Link href="/discovery" className="inline-block">
-              <Button className="h-12 px-12 rounded-xl text-[10px] font-bold uppercase tracking-widest gradient-primary border-none shadow-xl shadow-primary/40 text-white">
+              <Button className="h-12 px-10 rounded-xl text-[10px] font-bold uppercase tracking-widest gradient-primary border-none text-white">
                 Start Discovery
               </Button>
             </Link>
