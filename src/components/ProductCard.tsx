@@ -97,7 +97,7 @@ export function ProductCard({ product }: ProductCardProps) {
           <div className="flex items-center gap-2">
             <p className="text-primary text-[14px] font-black">₹{product.sale_price}</p>
             {product.regular_price && (
-              <p className="text-muted-foreground text-[10px] line-through decoration-primary/20 font-bold">₹{product.regular_price}</p>
+              <p className="text-muted-foreground text-[10px] line-through decoration-primary/20 decoration-2 font-bold">₹{product.regular_price}</p>
             )}
           </div>
         </div>

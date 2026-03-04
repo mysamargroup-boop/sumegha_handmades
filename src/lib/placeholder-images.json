@@ -1,3 +1,70 @@
 {
-  "placeholderImages": []
+  "placeholderImages": [
+    {
+      "id": "hero-pattern",
+      "description": "Elegant abstract pattern for hero backgrounds",
+      "imageUrl": "https://picsum.photos/seed/sumegha-pattern/1920/1080",
+      "imageHint": "abstract pattern"
+    },
+    {
+      "id": "artist-main",
+      "description": "Sumegha - The lead artist in her studio",
+      "imageUrl": "https://picsum.photos/seed/sumegha-artist/800/800",
+      "imageHint": "artist studio"
+    },
+    {
+      "id": "process-1",
+      "description": "Artist working on a Lippan art piece",
+      "imageUrl": "https://picsum.photos/seed/process1/600/600",
+      "imageHint": "crafting process"
+    },
+    {
+      "id": "process-2",
+      "description": "Intricate detail work on a name plate",
+      "imageUrl": "https://picsum.photos/seed/process2/600/600",
+      "imageHint": "detailed craft"
+    },
+    {
+      "id": "insta-1",
+      "description": "Instagram showcase 1",
+      "imageUrl": "https://picsum.photos/seed/insta1/500/500",
+      "imageHint": "art display"
+    },
+    {
+      "id": "insta-2",
+      "description": "Instagram showcase 2",
+      "imageUrl": "https://images.unsplash.com/photo-1589488766611-08aad2021d8b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw4fHxhcnQlMjBzdHVkaW98ZW58MHx8fHwxNzcyNTUyMjY2fDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "art studio"
+    },
+    {
+      "id": "insta-3",
+      "description": "Instagram showcase 3",
+      "imageUrl": "https://picsum.photos/seed/insta3/500/500",
+      "imageHint": "handmade decor"
+    },
+    {
+      "id": "blog-1",
+      "description": "The soul of handmade art",
+      "imageUrl": "https://picsum.photos/seed/blog1/1200/600",
+      "imageHint": "handmade art"
+    },
+    {
+      "id": "blog-2",
+      "description": "Traditional desert masterpiece",
+      "imageUrl": "https://picsum.photos/seed/blog2/1200/600",
+      "imageHint": "traditional art"
+    },
+    {
+      "id": "blog-3",
+      "description": "Designing for serenity",
+      "imageUrl": "https://picsum.photos/seed/blog3/1200/600",
+      "imageHint": "interior design"
+    },
+    {
+      "id": "studio-map",
+      "description": "Our studio location in Jaipur",
+      "imageUrl": "https://picsum.photos/seed/jaipur-map/800/400",
+      "imageHint": "map location"
+    }
+  ]
 }

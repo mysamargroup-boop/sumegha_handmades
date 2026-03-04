@@ -17,7 +17,7 @@ import * as React from "react";
 import { cn } from "@/lib/utils";
 import productsData from "@/lib/products.json";
 import categoriesData from "@/lib/categories.json";
-import placeholderData from "@/app/lib/placeholder-images.json";
+import placeholderData from "@/lib/placeholder-images.json";
 import { Product } from "@/lib/types";
 
 export default function Home() {

@@ -5,9 +5,10 @@ import Image from 'next/image';
 import { Calendar, User } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
+import placeholderData from '@/lib/placeholder-images.json';
 
 export default function BlogPage() {
-  const blogs = [
+  const blogPosts = [
     {
       id: "1",
       title: "The Soul of Handmade: Why It Matters",
@@ -15,7 +16,7 @@ export default function BlogPage() {
       author: "Sumegha",
       date: "January 12, 2026",
       category: "Philosophy",
-      image: "https://picsum.photos/seed/blog1/800/600"
+      imageId: "blog-1"
     },
     {
       id: "2",
@@ -24,7 +25,7 @@ export default function BlogPage() {
       author: "Sumegha",
       date: "January 20, 2026",
       category: "Tradition",
-      image: "https://picsum.photos/seed/blog2/800/600"
+      imageId: "blog-2"
     },
     {
       id: "3",
@@ -33,9 +34,19 @@ export default function BlogPage() {
       author: "Sumegha",
       date: "January 28, 2026",
       category: "Design",
-      image: "https://picsum.photos/seed/blog3/800/600"
+      imageId: "blog-3"
     }
   ];
+
+  const blogs = blogPosts.map(blog => {
+    const imageData = placeholderData.placeholderImages.find(img => img.id === blog.imageId);
+    return {
+      ...blog,
+      image: imageData ? imageData.imageUrl : ''
+    };
+  });
+
+  const heroPattern = placeholderData.placeholderImages.find(img => img.id === 'hero-pattern');
 
   return (
     <div className="min-h-screen py-16 lg:py-24">
@@ -91,7 +102,7 @@ export default function BlogPage() {
 
         <div className="mx-4 bg-[#181113] p-12 lg:p-20 rounded-[4rem] text-center space-y-8 relative overflow-hidden">
           <div className="absolute inset-0 opacity-10 pointer-events-none">
-            <Image src="https://picsum.photos/seed/patterns/1920/1080" alt="pattern" fill className="object-cover" />
+            {heroPattern && <Image src={heroPattern.imageUrl} alt="pattern" fill className="object-cover" />}
           </div>
           <div className="relative z-10 space-y-4">
             <h3 className="text-2xl lg:text-4xl font-black uppercase tracking-widest text-white">Never Miss a Story</h3>

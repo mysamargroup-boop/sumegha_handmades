@@ -179,7 +179,7 @@ export default function CollectionProductDetailPage({ params }: { params: Promis
               <div className="flex items-center gap-4">
                 <p className="text-3xl lg:text-5xl font-black font-headline text-primary">₹{product.sale_price}</p>
                 {product.regular_price && (
-                  <p className="text-xl lg:text-2xl text-muted-foreground line-through decoration-primary/20 font-black">₹{product.regular_price}</p>
+                  <p className="text-xl lg:text-2xl text-muted-foreground line-through decoration-primary/20 decoration-2 font-black">₹{product.regular_price}</p>
                 )}
               </div>
 

@@ -179,7 +179,7 @@ export default function ProductDetailPage({ params }: { params: Promise<{ id: st
               <div className="flex items-center gap-4">
                 <p className="text-3xl lg:text-5xl font-black font-headline text-primary">₹{product.sale_price}</p>
                 {product.regular_price && (
-                  <p className="text-xl lg:text-2xl text-muted-foreground line-through decoration-primary/20 font-black">₹{product.regular_price}</p>
+                  <p className="text-xl lg:text-2xl text-muted-foreground line-through decoration-primary/20 decoration-2 font-black">₹{product.regular_price}</p>
                 )}
               </div>
 
@@ -219,7 +219,7 @@ export default function ProductDetailPage({ params }: { params: Promise<{ id: st
             </div>
 
             <div className="space-y-4 w-full">
-              <div className="flex gap-3 w-full">
+              <div className.flex gap-3 w-full">
                 <Button 
                   size="lg" 
                   variant="outline"
