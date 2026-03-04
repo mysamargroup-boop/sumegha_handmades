@@ -1,4 +1,3 @@
-
 "use client";
 
 import Link from 'next/link';
@@ -43,8 +42,8 @@ export function Footer() {
     {
       title: "Legal",
       links: [
-        { name: "Privacy Policy", href: "#" },
-        { name: "Shipping Info", href: "#" },
+        { name: "Terms & Conditions", href: "/terms" },
+        { name: "Return & Refunds", href: "/returns" },
       ]
     },
     {
@@ -179,4 +178,3 @@ export function Footer() {
     </footer>
   );
 }
-

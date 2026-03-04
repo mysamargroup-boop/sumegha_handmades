@@ -33,14 +33,23 @@ export default function CartPage() {
       toast({
         title: "Coupon Applied!",
         description: "You got an extra 10% off.",
+        duration: 3000,
       });
-      setTimeout(() => setIsSparkling(false), 2000);
-    } else {
+      // Celebration effect lasts for 3 seconds
+      setTimeout(() => setIsSparkling(false), 3000);
+    } else if (couponCode.trim() !== '') {
       toast({
         variant: "destructive",
         title: "Invalid Coupon",
         description: "Please try SUMEGHA10 for a discount.",
+        duration: 3000,
       });
+    }
+  };
+
+  const handleKeyDown = (e: React.KeyboardEvent) => {
+    if (e.key === 'Enter') {
+      handleApplyCoupon();
     }
   };
 
@@ -61,9 +70,27 @@ export default function CartPage() {
 
   return (
     <div className="container mx-auto px-4 py-12 pb-32 max-w-7xl relative">
+      {/* Sparkling burst effect */}
       {isSparkling && (
-        <div className="fixed inset-0 pointer-events-none z-[100] flex items-center justify-center">
-          <Sparkles className="h-32 w-32 text-primary animate-bounce" />
+        <div className="fixed inset-0 pointer-events-none z-[100] flex items-center justify-center overflow-hidden">
+          <div className="relative w-full h-full">
+            {[...Array(20)].map((_, i) => (
+              <Sparkles 
+                key={i} 
+                className={cn(
+                  "absolute h-12 w-12 text-primary animate-bounce opacity-80",
+                  "animate-in fade-in zoom-in duration-1000"
+                )}
+                style={{
+                  top: `${Math.random() * 80 + 10}%`,
+                  left: `${Math.random() * 80 + 10}%`,
+                  animationDelay: `${Math.random() * 500}ms`,
+                  transform: `rotate(${Math.random() * 360}deg)`
+                }}
+              />
+            ))}
+            <div className="absolute inset-0 bg-primary/5 animate-pulse" />
+          </div>
         </div>
       )}
 
@@ -143,6 +170,7 @@ export default function CartPage() {
                   className="rounded-xl border-primary/10 bg-primary/5 h-12 text-[10px] font-bold tracking-widest uppercase"
                   value={couponCode}
                   onChange={(e) => setCouponCode(e.target.value)}
+                  onKeyDown={handleKeyDown}
                 />
                 <Button 
                   onClick={handleApplyCoupon}
