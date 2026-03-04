@@ -6,12 +6,12 @@
       "name": "Custom Name Plates",
       "slug": "custom-name-plates",
       "description": "Artisanal door decor personalized for your beautiful home. Experience contemporary design through bespoke handmade elegance.",
-      "imageUrl": "/categories/custom-name-plates.jpg",
+      "imageUrl": "https://picsum.photos/seed/cat-cnp/800/1000",
       "subCategories": [
-        { "name": "Home name plates", "imageUrl": "/categories/sub/home-name.jpg" },
-        { "name": "Couple name plates", "imageUrl": "/categories/sub/couple-name.jpg" },
-        { "name": "Resin name plates", "imageUrl": "/categories/sub/resin-name.jpg" },
-        { "name": "Personalized door name plates", "imageUrl": "/categories/sub/door-name.jpg" }
+        { "name": "Home name plates", "imageUrl": "https://picsum.photos/seed/sub-home/500/500" },
+        { "name": "Couple name plates", "imageUrl": "https://picsum.photos/seed/sub-couple/500/500" },
+        { "name": "Resin name plates", "imageUrl": "https://picsum.photos/seed/sub-resin/500/500" },
+        { "name": "Personalized door name plates", "imageUrl": "https://picsum.photos/seed/sub-door/500/500" }
       ]
     },
     {
@@ -19,7 +19,7 @@
       "name": "Shubh Symbols",
       "slug": "shubh-symbols",
       "description": "Traditional auspicious motifs to bring positive energy. Each piece is meticulously handcrafted with love and devotion.",
-      "imageUrl": "/categories/shubh-symbols.jpg",
+      "imageUrl": "https://picsum.photos/seed/cat-ss/800/1000",
       "subCategories": []
     },
     {
@@ -27,10 +27,10 @@
       "name": "Evil Eye Protection Decor",
       "slug": "evil-eye-protection",
       "description": "Nazar Battu decor pieces that combine protection with art. Safeguard your home with our traditional talismans.",
-      "imageUrl": "/categories/evil-eye.jpg",
+      "imageUrl": "https://picsum.photos/seed/cat-eep/800/1000",
       "subCategories": [
-        { "name": "Wall Protectors", "imageUrl": "/categories/sub/nazar-wall.jpg" },
-        { "name": "Hanging Talismans", "imageUrl": "/categories/sub/nazar-hanging.jpg" }
+        { "name": "Wall Protectors", "imageUrl": "https://picsum.photos/seed/sub-nazar-wall/500/500" },
+        { "name": "Hanging Talismans", "imageUrl": "https://picsum.photos/seed/sub-nazar-hanging/500/500" }
       ]
     },
     {
@@ -38,12 +38,12 @@
       "name": "Decorative Hangings",
       "slug": "decorative-hangings",
       "description": "Bespoke ensembles and treasures for your vertical spaces. Celebrate traditions with our vibrant range of festive decor.",
-      "imageUrl": "/categories/decorative-hangings.jpg",
+      "imageUrl": "https://picsum.photos/seed/cat-dh/800/1000",
       "subCategories": [
-        { "name": "Wall Hangings", "imageUrl": "/categories/sub/wall-hanging.jpg" },
-        { "name": "Door Hangings", "imageUrl": "/categories/sub/door-hanging.jpg" },
-        { "name": "Resin Decor", "imageUrl": "/categories/sub/resin-decor.jpg" },
-        { "name": "Handmade Art Pieces", "imageUrl": "/categories/sub/handmade-art.jpg" }
+        { "name": "Wall Hangings", "imageUrl": "https://picsum.photos/seed/sub-wall/500/500" },
+        { "name": "Door Hangings", "imageUrl": "https://picsum.photos/seed/sub-door-h/500/500" },
+        { "name": "Resin Decor", "imageUrl": "https://picsum.photos/seed/sub-resin-d/500/500" },
+        { "name": "Handmade Art Pieces", "imageUrl": "https://picsum.photos/seed/sub-art/500/500" }
       ]
     }
   ]

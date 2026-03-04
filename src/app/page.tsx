@@ -83,18 +83,19 @@ export default function Home() {
 
   const instagramPosts = placeholderData.placeholderImages.filter(img => img.id.startsWith('insta-'));
 
-  const heroSlides = categoriesData.categories.slice(0, 4).map(cat => ({
+  const heroSlides = categoriesData.categories.map((cat, idx) => ({
     badge: "COLLECTION HIGHLIGHT",
     title: cat.name.split(' ')[0].toUpperCase(),
     highlight: cat.name.split(' ').slice(1).join(' ').toUpperCase(),
     categoryName: cat.name,
     desc: cat.description,
-    image: cat.imageUrl
+    // Using variety from categories or fallback to variety picsum
+    image: cat.imageUrl || `https://picsum.photos/seed/hero-${idx}/1920/1080`
   }));
 
   return (
     <div className="flex flex-col w-full overflow-hidden">
-      <section className="relative w-full px-4 sm:px-6 pt-6 pb-16">
+      <section className="relative w-full px-4 sm:px-6 pt-6 pb-24">
         <Carousel 
           setApi={setApi}
           plugins={[plugin.current]}
@@ -139,7 +140,7 @@ export default function Home() {
                       <p className="text-base sm:text-2xl text-white/90 font-light leading-relaxed max-w-2xl drop-shadow-lg px-4">
                         {slide.desc}
                       </p>
-                      <div className="pt-6">
+                      <div className="pt-10">
                         <Link href={`/products?category=${encodeURIComponent(slide.categoryName)}`}>
                           <Button className="h-16 px-14 rounded-2xl text-[11px] font-black uppercase tracking-[0.3em] gradient-primary border-none shadow-2xl shadow-primary/50 active:scale-95 transition-all hover:scale-105">
                             Shop {slide.categoryName}
@@ -252,14 +253,6 @@ export default function Home() {
               </a>
             ))}
           </div>
-          
-          <div className="flex justify-center mt-16">
-            <Link href="https://instagram.com/sumegha_handmades" target="_blank">
-              <Button variant="outline" className="rounded-2xl border-primary text-primary font-black uppercase tracking-[0.3em] text-[11px] px-12 h-16 hover:bg-primary hover:text-white transition-all">
-                Follow our Journey
-              </Button>
-            </Link>
-          </div>
         </div>
       </section>
 
@@ -303,7 +296,7 @@ export default function Home() {
               <Image src={placeholderData.placeholderImages.find(img => img.id === 'hero-pattern')?.imageUrl || ''} alt="pattern" fill className="object-cover" />
             </div>
             <div className="relative z-10 space-y-6">
-              <div className="inline-block px-4 py-2 rounded-full bg-white/10 border border-white/20 text-[10px] font-black uppercase tracking-[0.4em]">
+              <div className="inline-block px-4 py-2 rounded-full bg-white/10 border border-white/20 text-[10px] font-black uppercase tracking-widest">
                 AI Powered Art Concierge
               </div>
               <h3 className="text-3xl lg:text-7xl font-black uppercase tracking-tight text-white leading-tight">Your Personal Curator</h3>
