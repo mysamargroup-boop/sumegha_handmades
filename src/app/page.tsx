@@ -253,8 +253,8 @@ export default function Home() {
       {/* Experience Section (Updated to match screenshot) */}
       <section className="py-24">
         <div className="container-normal">
-          <h4 className="text-[12px] font-bold text-center mb-16 uppercase tracking-[0.6em] text-primary">The Experience</h4>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-12 lg:gap-24">
+          <h4 className="text-[14px] font-bold text-center mb-16 uppercase tracking-[0.5em] text-primary">The Experience</h4>
+          <div className="grid grid-cols-3 gap-6 lg:gap-24">
             {[
               { title: "CURATE", desc: "Select from our gallery of artisan creations.", icon: MousePointer2 },
               { title: "CONNECT", desc: "Direct consultation via WhatsApp.", icon: WhatsAppIcon },
@@ -262,13 +262,13 @@ export default function Home() {
             ].map((step, idx) => {
               const Icon = step.icon;
               return (
-                <div key={idx} className="flex flex-col items-center text-center space-y-8 group">
-                  <div className="w-24 h-24 rounded-2xl bg-white shadow-sm border border-primary/10 flex items-center justify-center transition-all duration-500 group-hover:shadow-xl group-hover:scale-105">
-                    {typeof Icon === 'string' ? Icon : <Icon className="h-8 w-8 text-primary" />}
+                <div key={idx} className="flex flex-col items-center text-center space-y-6 group">
+                  <div className="w-20 h-20 md:w-32 md:h-32 rounded-[2rem] bg-white shadow-xl shadow-primary/5 border border-primary/5 flex items-center justify-center transition-all duration-500 group-hover:shadow-2xl group-hover:scale-105">
+                    {typeof Icon === 'string' ? Icon : <Icon className="h-10 w-10 md:h-14 md:w-14 text-primary stroke-[1.5px]" />}
                   </div>
-                  <div className="space-y-4">
-                    <h5 className="font-black text-xl lg:text-2xl uppercase tracking-[0.1em] text-foreground">{step.title}</h5>
-                    <p className="text-foreground/50 text-sm lg:text-base font-light leading-relaxed max-w-[200px] mx-auto">{step.desc}</p>
+                  <div className="space-y-2">
+                    <h5 className="font-black text-base md:text-xl uppercase tracking-[0.1em] text-foreground">{step.title}</h5>
+                    <p className="text-foreground/50 text-[10px] md:text-xs font-light leading-relaxed max-w-[150px] mx-auto">{step.desc}</p>
                   </div>
                 </div>
               );
