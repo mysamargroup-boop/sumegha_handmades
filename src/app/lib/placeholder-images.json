@@ -1,21 +1,22 @@
+
 {
   "placeholderImages": [
     {
       "id": "pottery-1",
       "description": "Hand-painted ceramic vase with floral motifs",
-      "imageUrl": "https://images.unsplash.com/photo-1665512594386-051aad8b9f68?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw1fHxjZXJhbWljJTIwdmFzZXxlbnwwfHx8fDE3NzI1MjcxNTl8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageUrl": "https://picsum.photos/seed/pottery1/600/800",
       "imageHint": "ceramic vase"
     },
     {
       "id": "painting-1",
       "description": "Abstract watercolor sunset on canvas",
-      "imageUrl": "https://images.unsplash.com/photo-1582125169804-bc28f3ecf7ce?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw5fHx3YXRlcmNvbG9yJTIwcGFpbnRpbmd8ZW58MHx8fHwxNzcyNTY0Njg0fDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageUrl": "https://picsum.photos/seed/painting1/800/600",
       "imageHint": "watercolor painting"
     },
     {
       "id": "jewelry-1",
       "description": "Handcrafted silver earrings with turquoise stones",
-      "imageUrl": "https://images.unsplash.com/photo-1573227895118-8f8fa1172a09?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxMHx8aGFuZG1hZGUlMjBqZXdlbHJ5fGVufDB8fHx8MTc3MjU4MDc3Nnww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageUrl": "https://picsum.photos/seed/jewelry1/600/600",
       "imageHint": "handmade jewelry"
     },
     {
@@ -27,7 +28,7 @@
     {
       "id": "candle-1",
       "description": "Scented soy wax candle in decorative glass",
-      "imageUrl": "https://images.unsplash.com/photo-1735380675871-cadd8ca29caf?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw3fHxoYW5kbWFkZSUyMGNhbmRsZXxlbnwwfHx8fDE3NzI1MzE3MjV8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageUrl": "https://picsum.photos/seed/candle1/600/600",
       "imageHint": "handmade candle"
     },
     {
