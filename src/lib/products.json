@@ -2,7 +2,7 @@
 {
   "products": [
     {
-      "id": "name-home-1",
+      "id": "SH-CNP-01",
       "name": "Elegant Floral Home Name Plate",
       "description": "A beautiful handcrafted name plate featuring intricate floral patterns and modern typography. Perfect for adding a warm, personal touch to your home entrance.",
       "imageUrl": "/products/custom-name-plates/home-name-plates/home-1.jpg",
@@ -17,7 +17,7 @@
       "rating": 5
     },
     {
-      "id": "name-couple-1",
+      "id": "SH-CNP-02",
       "name": "Eternal Bond Couple Name Plate",
       "description": "Celebrate your journey together with this bespoke couple's name plate. Features elegant interlocking designs and premium finish.",
       "imageUrl": "/products/custom-name-plates/couple-name-plates/couple-1.jpg",
@@ -32,7 +32,7 @@
       "rating": 5
     },
     {
-      "id": "name-resin-1",
+      "id": "SH-CNP-03",
       "name": "Ocean Breeze Resin Name Plate",
       "description": "Modern resin art meets functionality. This name plate features stunning sea-inspired textures and gold leaf accents.",
       "imageUrl": "/products/custom-name-plates/resin-name-plates/resin-1.jpg",
@@ -47,7 +47,7 @@
       "rating": 4
     },
     {
-      "id": "name-door-1",
+      "id": "SH-CNP-04",
       "name": "Minimalist Door Name Plate",
       "description": "Sleek and sophisticated door signage. High-quality materials with a weather-resistant protective coating.",
       "imageUrl": "/products/custom-name-plates/door-name-plates/door-1.jpg",
@@ -62,7 +62,7 @@
       "rating": 5
     },
     {
-      "id": "shubh-om-1",
+      "id": "SH-SS-01",
       "name": "Divine Om Brass Wall Hanging",
       "description": "Intricately designed Om symbol, handcrafted to bring peace and spiritual energy into your living space.",
       "imageUrl": "/products/shubh-symbols/om-swastik/om-1.jpg",
@@ -77,7 +77,7 @@
       "rating": 5
     },
     {
-      "id": "shubh-ganesha-1",
+      "id": "SH-SS-02",
       "name": "Vighnaharta Ganesha Mural",
       "description": "A stunning Ganesha wall mural crafted from traditional clay and mirrors. Brings prosperity to your home.",
       "imageUrl": "/products/shubh-symbols/ganesha-art/ganesha-1.jpg",
@@ -92,7 +92,7 @@
       "rating": 5
     },
     {
-      "id": "nazar-wall-1",
+      "id": "SH-EEP-01",
       "name": "Majestic Evil Eye Wall Protector",
       "description": "Authentic Nazar Battu decor. Features vibrant blue glass and intricate embroidery to protect your sanctuary.",
       "imageUrl": "/products/evil-eye/wall-protectors/nazar-1.jpg",
@@ -107,7 +107,7 @@
       "rating": 5
     },
     {
-      "id": "nazar-resin-1",
+      "id": "SH-EEP-02",
       "name": "Golden Nazar Resin Charm",
       "description": "Contemporary resin charm with embedded evil eye protection and gold flake accents.",
       "imageUrl": "/products/evil-eye/resin-nazar/resin-nazar-1.jpg",
@@ -122,7 +122,7 @@
       "rating": 4
     },
     {
-      "id": "hang-wall-1",
+      "id": "SH-DH-01",
       "name": "Boho Macrame Wall Ensemble",
       "description": "A multi-layered macrame wall hanging that adds texture and warmth to any room. 100% natural cotton.",
       "imageUrl": "/products/decorative-hangings/wall-hangings/wall-1.jpg",
@@ -137,7 +137,7 @@
       "rating": 5
     },
     {
-      "id": "hang-resin-1",
+      "id": "SH-DH-02",
       "name": "Crystal Clear Resin Sun-catcher",
       "description": "Hanging resin art that catches the light beautifully. Features real dried flowers and sparkles.",
       "imageUrl": "/products/decorative-hangings/resin-decor/resin-1.jpg",
@@ -152,7 +152,7 @@
       "rating": 5
     },
     {
-      "id": "fest-thali-1",
+      "id": "SH-FSG-01",
       "name": "Royal Peacock Pooja Thali",
       "description": "Exquisitely hand-painted pooja thali for festive occasions. Includes matching diya and containers.",
       "imageUrl": "/products/festive-gifts/thali-1.jpg",
@@ -167,7 +167,7 @@
       "rating": 5
     },
     {
-      "id": "home-lippan-1",
+      "id": "SH-HD-01",
       "name": "Classic Kutch Lippan Mural",
       "description": "Traditional mud and mirror work on a wooden base. Brings the spirit of Kutch into your modern home.",
       "imageUrl": "/products/home-decor/lippan-1.jpg",
@@ -182,7 +182,7 @@
       "rating": 5
     },
     {
-      "id": "wed-trunk-1",
+      "id": "SH-WED-01",
       "name": "Legacy Bridal Trousseau Trunk",
       "description": "Velvet-lined royal trunk with intricate metal and wood work. A perfect heirloom for storing bridal memories.",
       "imageUrl": "/products/wedding/trunk-1.jpg",
