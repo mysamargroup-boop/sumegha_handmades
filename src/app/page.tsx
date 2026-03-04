@@ -1,3 +1,4 @@
+
 "use client";
 
 import Link from 'next/link';
@@ -32,7 +33,7 @@ export default function Home() {
   const [count, setCount] = React.useState(0);
   const [progress, setProgress] = React.useState(0);
 
-  const SLIDE_DURATION = 5000;
+  const SLIDE_DURATION = 7000;
 
   const plugin = React.useRef(
     Autoplay({ delay: SLIDE_DURATION, stopOnInteraction: false })
@@ -127,14 +128,20 @@ export default function Home() {
                       src={slide.image}
                       alt={slide.title}
                       fill
-                      className="object-cover opacity-80"
+                      className={cn(
+                        "object-cover transition-all duration-1000",
+                        current === index ? "opacity-80 blur-0 scale-100" : "opacity-0 blur-md scale-110"
+                      )}
                       priority
                     />
                     <div className="absolute inset-0 bg-black/20 backdrop-blur-[1px]" />
                     <div className="absolute inset-0 bg-gradient-to-b from-transparent via-black/5 to-black/30" />
                   </div>
 
-                  <div className="relative z-10 h-full flex items-center justify-center p-6 text-center">
+                  <div className={cn(
+                    "relative z-10 h-full flex items-center justify-center p-6 text-center transition-all duration-1000 delay-300",
+                    current === index ? "opacity-100 translate-y-0 blur-0" : "opacity-0 translate-y-4 blur-sm"
+                  )}>
                     <div className="flex flex-col items-center space-y-4">
                       <div className="inline-block px-3 py-1 rounded-full border border-white/20 text-[9px] font-bold uppercase tracking-[0.3em] text-white bg-white/10 backdrop-blur-md">
                         {slide.badge}
@@ -229,10 +236,7 @@ export default function Home() {
                 <h2 className="text-xl lg:text-4xl font-black uppercase tracking-tight text-foreground leading-tight">{catName}</h2>
               </div>
               <Link href={`/products?category=${catName}`} className="flex items-center gap-2 text-primary font-black uppercase tracking-widest text-[9px] group">
-                <div className="flex flex-col text-right leading-none">
-                  <span>VIEW</span>
-                  <span>ALL</span>
-                </div>
+                <span className="whitespace-nowrap">VIEW ALL</span>
                 <ChevronRight className="h-3 w-3 transition-transform group-hover:translate-x-1" />
               </Link>
             </div>
@@ -240,7 +244,7 @@ export default function Home() {
             <Carousel opts={{ align: "start", loop: true }} className="w-full">
               <CarouselContent className="-ml-3">
                 {products.slice(0, 6).map((product) => (
-                  <CarouselItem key={product.id} className="pl-3 basis-[70%] sm:basis-1/2 md:basis-1/3 lg:basis-1/4">
+                  <CarouselItem key={product.id} className="pl-3 basis-[50%] md:basis-1/4">
                     <ProductCard product={product} />
                   </CarouselItem>
                 ))}
