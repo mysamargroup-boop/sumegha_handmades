@@ -1,19 +1,20 @@
+
 "use client";
 
 import Link from 'next/link';
 import Image from 'next/image';
-import { Sparkles, PanelsTopLeft, MousePointer2, Truck } from 'lucide-react';
+import { Sparkles, PanelsTopLeft, MousePointer2, Truck, Gem } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { ProductCard } from '@/components/ProductCard';
 import {
   Carousel,
   CarouselContent,
   CarouselItem,
-  CarouselNext,
-  CarouselPrevious,
+  type CarouselApi,
 } from "@/components/ui/carousel";
 import Autoplay from "embla-carousel-autoplay";
 import * as React from "react";
+import { cn } from "@/lib/utils";
 
 const WhatsAppIcon = ({ className }: { className?: string }) => (
   <svg 
@@ -27,28 +28,43 @@ const WhatsAppIcon = ({ className }: { className?: string }) => (
 );
 
 export default function Home() {
+  const [api, setApi] = React.useState<CarouselApi>();
+  const [current, setCurrent] = React.useState(0);
+  const [count, setCount] = React.useState(0);
+
   const plugin = React.useRef(
-    Autoplay({ delay: 5000, stopOnInteraction: true })
+    Autoplay({ delay: 5000, stopOnInteraction: false })
   );
+
+  React.useEffect(() => {
+    if (!api) return;
+
+    setCount(api.scrollSnapList().length);
+    setCurrent(api.selectedScrollSnap());
+
+    api.on("select", () => {
+      setCurrent(api.selectedScrollSnap());
+    });
+  }, [api]);
 
   const heroSlides = [
     {
       title: "Handmade Elegance",
       subtitle: "Curated for Your Home",
       desc: "Experience contemporary design through bespoke handmade elegance. Every piece is a testament to sophisticated simplicity.",
-      image: "https://images.unsplash.com/photo-1665512594386-051aad8b9f68?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080",
+      image: "https://picsum.photos/seed/slide1/800/800",
     },
     {
       title: "Artisanal Soul",
       subtitle: "Crafted With Love",
       desc: "Discover unique, heartfelt creations from traditional pottery to modern paintings.",
-      image: "https://images.unsplash.com/photo-1582125169804-bc28f3ecf7ce?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080",
+      image: "https://picsum.photos/seed/slide2/800/800",
     },
     {
       title: "Bespoke Jewelry",
       subtitle: "Personalized For You",
       desc: "Each piece is meticulously handcrafted, ensuring no two items are exactly alike.",
-      image: "https://images.unsplash.com/photo-1573227895118-8f8fa1172a09?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080",
+      image: "https://picsum.photos/seed/slide3/800/800",
     }
   ];
 
@@ -58,7 +74,7 @@ export default function Home() {
       name: "Vibrant Lippan Art",
       description: "Traditional mirror work handcrafted with precision.",
       price: 1299,
-      imageUrl: "https://lh3.googleusercontent.com/aida-public/AB6AXuCdc7QHqmb8IoFw1otk9qpDxgkSPFRF6v-g9-5wUHln1LJGtaytUpF9dDwusObFHk6_SzO1aI-t6j8Y93gOlZXcQUTlQqYz153HEzKAK3peQTe5dLHDSkdyFmdySPUJvRZI0dCkMg9DXujNS1ZfX2KnrQc-NH1GRCM2FhOfkLfSUh4KW4rpZ0fIspAwU_rEmx2J3S4iySUFnCHvEB6tqbdKgnQTNV1JYCP9at0W7pUqgwTOoRuJncTZBnjhx0C4kD3sES8ZoEUXmUqS",
+      imageUrl: "https://picsum.photos/seed/art1/600/600",
       category: "Art"
     },
     {
@@ -66,7 +82,7 @@ export default function Home() {
       name: "Custom Nameplates",
       description: "Elegant personalized ceramic nameplates for your home.",
       price: 1599,
-      imageUrl: "https://lh3.googleusercontent.com/aida-public/AB6AXuB5zZUhE3Y6R0W0llzf9IYPUY54CnECp6lnAAgpPAOZXAVcovYGiPinIU5GU5hFXHABy7Rv8cgeHrVED6CN7ALdvaHQV7v8-oIH2SWmAw0nL9-NDb5h8Ms_Fi4HWNbhj2t9NlGtCN7JK8hogz7baDruuQaOxdjjdO3uKU9Ni2KOBgyFmV8k0OeewvIzaumYWoke22z5uIKAtVgNtnjQeEhTi____7CDtA1VAyDyd4c4ixsA8S85-dszzsrBphWbt7iD_Ig7hMZfTcmE",
+      imageUrl: "https://picsum.photos/seed/name1/600/600",
       category: "Decor"
     },
     {
@@ -74,7 +90,7 @@ export default function Home() {
       name: "Indian Folk Art",
       description: "Authentic traditional patterns on canvas.",
       price: 899,
-      imageUrl: "https://lh3.googleusercontent.com/aida-public/AB6AXuD63rFSKw-M6kg2WTaH9p8ikR9JvpsN4Dqj-g-rQ52URHNznf5jw3X80OgUQbWEbdeuoGWqLg9PFYylTOWofLYGeZnIXp-DzsBPm4Ddr_8cu8xqn9XagBWvq1cIgDR0O8x3ayw3s6X6H9LkcJkt2_4JNL6ezqYUB4cKZv6fGe-JL1ZCPHCplBHK3Nqi5DifB3GrwI_cnp6sklwGaoSuXjkEiX0pTuAiknZ6Fzksw_1oApPFYngCdcCBFBMVhkNhS-uaRyzlh5QkJVLz",
+      imageUrl: "https://picsum.photos/seed/folk1/600/600",
       category: "Art",
       tags: ['Bestseller']
     },
@@ -83,7 +99,7 @@ export default function Home() {
       name: "Festive Decor",
       description: "Handcrafted ornaments for every special occasion.",
       price: 650,
-      imageUrl: "https://lh3.googleusercontent.com/aida-public/AB6AXuBUsyLP0xQMBpBkX_34Kj-cuDT5Rt4ifEcem4J1L_mgabKGB97S43wAnV3SEhO7ZlFrlm-hn_wstC9QhnfZyk9bElqhlxnrbks4uA6O1TwHSX8UUeXhLBkuATFBPVp0jOcr115YiKqsvYnuVrUObk0Xdt7GWGrNQhNKI0FPE_ajD5Bv2t7Q3SJHrmthSrUElVFOnkWhS9I_whOnbMpD0z0oZ0f5ZGxb08qhpydxFVtZLgTpkD2Bx2UkCFhNQCwefFEoScaZd1adHi88",
+      imageUrl: "https://picsum.photos/seed/decor1/600/600",
       category: "Decor"
     },
     {
@@ -91,7 +107,7 @@ export default function Home() {
         name: "Artisanal Jewelry",
         description: "Handcrafted pieces that tell a story.",
         price: 450,
-        imageUrl: "https://images.unsplash.com/photo-1573227895118-8f8fa1172a09?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080",
+        imageUrl: "https://picsum.photos/seed/jewel1/600/600",
         category: "Jewelry"
     }
   ];
@@ -101,18 +117,19 @@ export default function Home() {
       {/* Hero Slider Section */}
       <section className="relative w-full overflow-hidden">
         <Carousel 
+          setApi={setApi}
           plugins={[plugin.current]}
           className="w-full"
-          onMouseEnter={plugin.current.stop}
-          onMouseLeave={plugin.current.reset}
+          onMouseEnter={() => plugin.current.stop()}
+          onMouseLeave={() => plugin.current.play()}
         >
           <CarouselContent>
             {heroSlides.map((slide, index) => (
               <CarouselItem key={index}>
-                <div className="relative min-h-[600px] flex items-center justify-center py-20 bg-background/50">
+                <div className="relative min-h-[600px] flex items-center justify-center py-20">
                   <div className="container-normal relative z-10 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-                    <div className="space-y-8 text-center lg:text-left animate-in fade-in slide-in-from-left duration-700">
-                      <div className="inline-block px-4 py-1.5 rounded-full bg-primary/10 border border-primary/20 text-xs font-bold uppercase tracking-[0.2em] text-primary">
+                    <div className="space-y-8 text-center lg:text-left">
+                      <div className="inline-block px-4 py-1.5 rounded-full bg-primary/10 border border-primary/20 text-[10px] font-bold uppercase tracking-[0.2em] text-primary">
                         {slide.subtitle}
                       </div>
                       <h1 className="text-4xl lg:text-7xl font-black leading-tight uppercase tracking-tight text-foreground">
@@ -121,7 +138,7 @@ export default function Home() {
                       <p className="text-lg lg:text-xl text-foreground/70 font-light max-w-xl mx-auto lg:mx-0 leading-relaxed">
                         {slide.desc}
                       </p>
-                      <div className="flex flex-col sm:flex-row items-center gap-4 pt-4">
+                      <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 pt-4">
                         <Link href="/products" className="w-full sm:w-auto">
                           <Button className="w-full h-14 px-10 rounded-xl text-xs font-bold uppercase tracking-widest gradient-primary">
                             View Collection
@@ -138,16 +155,16 @@ export default function Home() {
                       </div>
                     </div>
 
-                    <div className="relative aspect-square max-w-[500px] mx-auto lg:ml-auto animate-in fade-in slide-in-from-right duration-700">
-                      <div className="absolute inset-0 bg-primary/20 rounded-[3rem] rotate-3 scale-105"></div>
-                      <div className="relative h-full w-full rounded-[3rem] overflow-hidden shadow-2xl border-8 border-white">
+                    <div className="relative aspect-square w-full max-w-[450px] mx-auto lg:ml-auto">
+                      <div className="absolute inset-0 bg-primary/10 rounded-[3rem] rotate-3 scale-105"></div>
+                      <div className="relative h-full w-full rounded-[3rem] overflow-hidden shadow-2xl border-4 border-white">
                         <Image 
                           src={slide.image}
                           alt={slide.title}
                           fill
                           className="object-cover"
                           priority
-                          data-ai-hint="handmade craft"
+                          data-ai-hint="handmade art"
                         />
                       </div>
                     </div>
@@ -156,9 +173,20 @@ export default function Home() {
               </CarouselItem>
             ))}
           </CarouselContent>
-          <div className="hidden lg:block">
-            <CarouselPrevious className="left-8" />
-            <CarouselNext className="right-8" />
+          
+          {/* Autoplay Indicators (Dots) */}
+          <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex gap-2 z-20">
+            {Array.from({ length: count }).map((_, i) => (
+              <button
+                key={i}
+                className={cn(
+                  "h-1.5 transition-all duration-300 rounded-full",
+                  current === i ? "w-8 bg-primary" : "w-2 bg-primary/20"
+                )}
+                onClick={() => api?.scrollTo(i)}
+                aria-label={`Go to slide ${i + 1}`}
+              />
+            ))}
           </div>
         </Carousel>
       </section>
@@ -168,14 +196,15 @@ export default function Home() {
         <div className="container-normal">
           <div className="flex items-end justify-between mb-16">
             <div className="space-y-4">
-              <h4 className="text-xs font-bold uppercase tracking-[0.3em] text-primary">Gallery</h4>
+              <h4 className="text-[10px] font-bold uppercase tracking-[0.3em] text-primary">Gallery</h4>
               <h2 className="text-3xl lg:text-5xl font-black uppercase tracking-tight text-foreground">Featured Works</h2>
             </div>
-            <Link href="/products" className="text-foreground text-xs font-bold uppercase tracking-[0.2em] border-b-2 border-primary/20 pb-1 hover:border-primary transition-all">
+            <Link href="/products" className="text-foreground text-[10px] font-bold uppercase tracking-[0.2em] border-b-2 border-primary/20 pb-1 hover:border-primary transition-all">
               See All Gallery
             </Link>
           </div>
           
+          {/* Grid: Desktop 5, Mobile 2 */}
           <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-6 lg:gap-8">
             {featuredProducts.map((product) => (
               <ProductCard key={product.id} product={product} />
@@ -189,7 +218,7 @@ export default function Home() {
         <div className="container-normal">
           <div className="bg-white p-12 lg:p-24 rounded-[3rem] shadow-sm text-center border border-gray-100 space-y-8">
             <PanelsTopLeft className="h-10 w-10 text-primary/30 mx-auto" />
-            <h4 className="text-xs font-bold uppercase tracking-[0.3em] text-primary">The Philosophy</h4>
+            <h4 className="text-[10px] font-bold uppercase tracking-[0.3em] text-primary">The Philosophy</h4>
             <p className="text-foreground/70 text-lg md:text-3xl leading-relaxed font-light italic max-w-4xl mx-auto">
               "Rooted in contemporary aesthetics and traditional soul, we believe in the power of handmade elements to transform spaces into personal sanctuaries of elegance."
             </p>
@@ -201,7 +230,7 @@ export default function Home() {
       {/* Experience Section */}
       <section className="py-32">
         <div className="container-normal">
-          <h4 className="text-xs font-bold text-center mb-24 uppercase tracking-[0.5em] text-primary">The Experience</h4>
+          <h4 className="text-[10px] font-bold text-center mb-24 uppercase tracking-[0.5em] text-primary">The Experience</h4>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-16 lg:gap-24">
             {[
               { id: '01', title: "Curate", desc: "Select from our gallery of hand-designed artisan creations.", icon: MousePointer2 },
@@ -211,12 +240,12 @@ export default function Home() {
               const Icon = step.icon;
               return (
                 <div key={step.id} className="flex flex-col items-center text-center gap-8 group">
-                  <div className="size-20 rounded-3xl border border-primary/10 flex items-center justify-center text-lg font-black text-primary bg-white shadow-sm group-hover:bg-primary group-hover:text-white transition-all duration-500 group-hover:shadow-xl group-hover:shadow-primary/20">
-                    {typeof Icon === 'string' ? Icon : <Icon className="h-8 w-8 text-primary group-hover:text-white transition-colors" />}
+                  <div className="size-16 rounded-2xl border border-primary/10 flex items-center justify-center text-[10px] font-black text-primary bg-white shadow-sm group-hover:bg-primary group-hover:text-white transition-all duration-500 group-hover:shadow-xl group-hover:shadow-primary/20">
+                    {typeof Icon === 'string' ? Icon : <Icon className="h-6 w-6 text-primary group-hover:text-white transition-colors" />}
                   </div>
-                  <div className="space-y-4">
-                    <h5 className="font-bold text-xl uppercase tracking-widest text-foreground">{step.title}</h5>
-                    <p className="text-foreground/60 text-sm font-light leading-relaxed max-w-[280px]">{step.desc}</p>
+                  <div className="space-y-3">
+                    <h5 className="font-bold text-lg uppercase tracking-widest text-foreground">{step.title}</h5>
+                    <p className="text-foreground/60 text-xs font-light leading-relaxed max-w-[240px] mx-auto">{step.desc}</p>
                   </div>
                 </div>
               );
@@ -228,7 +257,7 @@ export default function Home() {
       {/* AI Assistant CTA */}
       <section className="py-24">
         <div className="container-normal">
-          <div className="bg-foreground text-white p-12 lg:p-24 rounded-[4rem] text-center space-y-10 relative overflow-hidden shadow-2xl">
+          <div className="bg-[#181113] text-white p-12 lg:p-24 rounded-[4rem] text-center space-y-10 relative overflow-hidden shadow-2xl">
             <div className="absolute top-0 right-0 w-64 h-64 opacity-5 -mr-12 -mt-12 pointer-events-none">
               <Sparkles className="w-full h-full" />
             </div>
@@ -237,12 +266,12 @@ export default function Home() {
                 AI Powered
               </div>
               <h3 className="text-3xl lg:text-6xl font-black uppercase tracking-[0.1em] text-white">Ask the Art Concierge</h3>
-              <p className="text-white/60 text-base lg:text-lg font-light tracking-wide max-w-2xl mx-auto leading-relaxed">
+              <p className="text-white/60 text-sm lg:text-lg font-light tracking-wide max-w-2xl mx-auto leading-relaxed">
                 Not sure which piece fits your aesthetic? Our AI Assistant can curate a selection based on your unique preferences and home decor style.
               </p>
             </div>
             <Link href="/discovery" className="inline-block">
-              <Button className="h-16 px-16 rounded-2xl text-xs font-bold uppercase tracking-widest gradient-primary border-none shadow-2xl shadow-primary/40 hover:scale-105 transition-transform">
+              <Button className="h-16 px-16 rounded-2xl text-[10px] font-bold uppercase tracking-widest gradient-primary border-none shadow-2xl shadow-primary/40 hover:scale-105 transition-transform">
                 Start Discovery
               </Button>
             </Link>
