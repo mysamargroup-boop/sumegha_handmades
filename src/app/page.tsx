@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import Image from 'next/image';
-import { Truck, ChevronRight } from 'lucide-react';
+import { Truck, ChevronRight, Star, Quote } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { ProductCard } from '@/components/ProductCard';
 import {
@@ -75,6 +75,30 @@ export default function Home() {
       { id: "wed-4", name: "Floral Jewelry", price: 899, originalPrice: 1500, imageUrl: "https://picsum.photos/seed/floral/600/600", category: "Wedding", tags: ["Traditional"], rating: 5 },
     ]
   };
+
+  const testimonials = [
+    {
+      name: "Anjali Mehta",
+      role: "Home Stylist",
+      content: "The Lippan Art piece I bought is the soul of my living room. Every guest asks about it!",
+      avatar: "https://picsum.photos/seed/user1/100/100",
+      stars: 5
+    },
+    {
+      name: "Rohan Sharma",
+      role: "Gifting Enthusiast",
+      content: "The personalized nameplate exceeded my expectations. Sumegha's attention to detail is unmatched.",
+      avatar: "https://picsum.photos/seed/user2/100/100",
+      stars: 5
+    },
+    {
+      name: "Priya Das",
+      role: "Bridal Client",
+      content: "My bridal trunk box is a treasure. It's royal, elegant, and perfectly handcrafted.",
+      avatar: "https://picsum.photos/seed/user3/100/100",
+      stars: 5
+    }
+  ];
 
   const heroSlides = [
     {
@@ -178,8 +202,8 @@ export default function Home() {
       </section>
 
       <section className="py-12 bg-white/40 border-b border-white">
-        <div className="container-normal px-4">
-          <div className="flex flex-col items-center text-center gap-1 mb-8">
+        <div className="container-normal px-4 text-center">
+          <div className="flex flex-col items-center gap-1 mb-8">
             <h4 className="text-[9px] font-bold uppercase tracking-[0.4em] text-primary">Discover Our</h4>
             <h2 className="text-xl lg:text-4xl font-black uppercase tracking-tight">Artistic Categories</h2>
           </div>
@@ -228,6 +252,38 @@ export default function Home() {
           </div>
         </section>
       ))}
+
+      {/* Testimonials Section */}
+      <section className="py-24 bg-white/60">
+        <div className="container-normal px-4">
+          <div className="text-center mb-16 space-y-3">
+            <p className="text-[10px] font-black uppercase tracking-[0.5em] text-primary">The Community</p>
+            <h2 className="text-2xl lg:text-5xl font-black uppercase tracking-tight">What Our Collectors Say</h2>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {testimonials.map((t, i) => (
+              <div key={i} className="bg-white p-8 rounded-[2.5rem] border border-primary/5 shadow-sm space-y-6 relative group hover:shadow-xl transition-all duration-500">
+                <Quote className="absolute top-8 right-8 h-8 w-8 text-primary/5 group-hover:text-primary/10 transition-colors" />
+                <div className="flex items-center gap-4">
+                  <div className="relative h-12 w-12 rounded-full overflow-hidden border-2 border-primary/10">
+                    <Image src={t.avatar} alt={t.name} fill className="object-cover" />
+                  </div>
+                  <div>
+                    <h4 className="text-xs font-black uppercase tracking-widest">{t.name}</h4>
+                    <p className="text-[10px] text-muted-foreground uppercase font-bold tracking-tight">{t.role}</p>
+                  </div>
+                </div>
+                <div className="flex text-amber-400 gap-0.5">
+                  {Array.from({ length: t.stars }).map((_, s) => (
+                    <Star key={s} className="h-3 w-3 fill-current" />
+                  ))}
+                </div>
+                <p className="text-sm text-foreground/70 leading-relaxed italic font-light">"{t.content}"</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
 
       <section className="py-16">
         <div className="container-normal px-4">

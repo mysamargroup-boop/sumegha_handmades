@@ -1,10 +1,9 @@
-
 "use client";
 
 import { use, useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { Heart, ShoppingCart, Share2, Star, Sparkles, ChevronRight, Zap, ShieldCheck, Leaf, Medal } from 'lucide-react';
+import { Heart, ShoppingCart, Share2, Star, Sparkles, ChevronRight, Zap, ShieldCheck, Leaf, Medal, Quote, User } from 'lucide-react';
 import { PlaceHolderImages } from '@/lib/placeholder-images';
 import { useStore } from '@/lib/store';
 import { Button } from '@/components/ui/button';
@@ -71,6 +70,12 @@ export default function ProductDetailPage({ params }: { params: Promise<{ catego
     imageUrl: productData.imageUrl,
     category
   };
+
+  const reviews = [
+    { name: "Kavya R.", rating: 5, date: "Feb 12, 2026", comment: "Absolutely stunning craftsmanship. The details are even better in person." },
+    { name: "Amit S.", rating: 5, date: "Jan 28, 2026", comment: "Bought this for a housewarming gift, and my sister loved it. Great quality." },
+    { name: "Sonal P.", rating: 4, date: "Jan 15, 2026", comment: "Very beautiful piece. Packaging was secure and delivery was on time." }
+  ];
 
   const wishlisted = isWishlisted(product.id);
 
@@ -177,7 +182,7 @@ export default function ProductDetailPage({ params }: { params: Promise<{ catego
                   <div className="flex text-amber-400">
                     {[1, 2, 3, 4, 5].map(s => <Star key={s} className="h-3 w-3 fill-current" />)}
                   </div>
-                  <span className="text-[10px] font-bold text-muted-foreground">(24 reviews)</span>
+                  <span className="text-[10px] font-bold text-muted-foreground">({reviews.length} reviews)</span>
                 </div>
                 
                 <div className="flex items-center gap-2">
@@ -266,17 +271,91 @@ export default function ProductDetailPage({ params }: { params: Promise<{ catego
             </div>
 
             <div className="pt-8">
-              <Accordion type="single" collapsible className="w-full">
-                <AccordionItem value="shipping" className="border-primary/5">
-                  <AccordionTrigger className="text-[11px] font-bold uppercase tracking-widest hover:no-underline">Shipping & Delivery</AccordionTrigger>
-                  <AccordionContent className="text-muted-foreground text-sm font-light">
-                    We offer free shipping on all orders over ₹999.
+              <Accordion type="single" collapsible className="w-full space-y-2">
+                <AccordionItem value="shipping" className="border-primary/5 bg-white/30 px-4 rounded-xl">
+                  <AccordionTrigger className="text-[11px] font-black uppercase tracking-widest">Shipping & Delivery</AccordionTrigger>
+                  <AccordionContent className="text-muted-foreground text-sm font-light leading-relaxed">
+                    We offer free shipping on all orders over ₹999. Since each piece is handmade, please allow 5-7 business days for creation and shipping.
+                  </AccordionContent>
+                </AccordionItem>
+                <AccordionItem value="care" className="border-primary/5 bg-white/30 px-4 rounded-xl">
+                  <AccordionTrigger className="text-[11px] font-black uppercase tracking-widest">Care Instructions</AccordionTrigger>
+                  <AccordionContent className="text-muted-foreground text-sm font-light leading-relaxed">
+                    Clean gently with a dry microfibre cloth. Avoid direct exposure to moisture or prolonged direct sunlight to preserve the vibrant colors and mirror work.
+                  </AccordionContent>
+                </AccordionItem>
+                <AccordionItem value="returns" className="border-primary/5 bg-white/30 px-4 rounded-xl">
+                  <AccordionTrigger className="text-[11px] font-black uppercase tracking-widest">Return Policy</AccordionTrigger>
+                  <AccordionContent className="text-muted-foreground text-sm font-light leading-relaxed">
+                    Due to the bespoke nature of our art, we only accept returns if the product arrives damaged. Please provide an unboxing video within 24 hours of delivery.
+                  </AccordionContent>
+                </AccordionItem>
+                <AccordionItem value="gifting" className="border-primary/5 bg-white/30 px-4 rounded-xl">
+                  <AccordionTrigger className="text-[11px] font-black uppercase tracking-widest">Gift Wrapping</AccordionTrigger>
+                  <AccordionContent className="text-muted-foreground text-sm font-light leading-relaxed">
+                    Premium artisanal gift wrapping is available. You can add a personalized handwritten note at checkout for that special touch.
                   </AccordionContent>
                 </AccordionItem>
               </Accordion>
             </div>
           </div>
         </div>
+
+        {/* Reviews Section */}
+        <section className="py-20 border-t border-primary/5">
+          <div className="flex flex-col md:flex-row justify-between items-start gap-10 mb-12">
+            <div className="space-y-3">
+              <h2 className="text-2xl lg:text-4xl font-black font-headline uppercase tracking-tight">Verified Reviews</h2>
+              <div className="flex items-center gap-3">
+                <div className="flex text-amber-400">
+                  {[1,2,3,4,5].map(s => <Star key={s} className="h-4 w-4 fill-current" />)}
+                </div>
+                <span className="text-sm font-bold text-muted-foreground">4.9 out of 5 based on {reviews.length} reviews</span>
+              </div>
+            </div>
+            <Button variant="outline" className="rounded-xl border-primary text-primary font-black uppercase tracking-widest text-[10px] h-12 px-8">
+              Write a Review
+            </Button>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8">
+            {reviews.map((review, i) => (
+              <div key={i} className="bg-white/50 p-8 rounded-[2rem] border border-primary/5 space-y-4 shadow-sm hover:shadow-md transition-all">
+                <div className="flex justify-between items-start">
+                  <div className="flex items-center gap-3">
+                    <div className="h-10 w-10 rounded-full bg-primary/10 flex items-center justify-center text-primary font-black">
+                      <User className="h-5 w-5" />
+                    </div>
+                    <div>
+                      <p className="text-xs font-black uppercase tracking-widest">{review.name}</p>
+                      <p className="text-[10px] text-muted-foreground font-bold">{review.date}</p>
+                    </div>
+                  </div>
+                  <div className="flex text-amber-400 gap-0.5">
+                    {Array.from({ length: review.rating }).map((_, s) => (
+                      <Star key={s} className="h-3 w-3 fill-current" />
+                    ))}
+                  </div>
+                </div>
+                <p className="text-sm text-foreground/70 leading-relaxed font-light italic">"{review.comment}"</p>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        {recommendedProducts.length > 0 && (
+          <div className="space-y-10 pt-20 border-t border-primary/5">
+            <div className="text-center">
+              <h4 className="text-[10px] font-bold uppercase tracking-[0.5em] text-primary mb-2">You May Also Like</h4>
+              <h2 className="text-2xl lg:text-3xl font-black font-headline tracking-tight uppercase">Recommended Pieces</h2>
+            </div>
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 lg:gap-8">
+              {recommendedProducts.map(p => (
+                <ProductCard key={p.id} product={p} />
+              ))}
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );
