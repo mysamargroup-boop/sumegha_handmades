@@ -15,6 +15,7 @@ export function Header() {
     { name: 'Home', href: '/' },
     { name: 'Gallery', href: '/products' },
     { name: 'Our Story', href: '/about' },
+    { name: 'Blog', href: '/blog' },
     { name: 'AI Concierge', href: '/discovery' },
   ];
 
@@ -31,36 +32,36 @@ export function Header() {
               className="rounded-full hover:bg-black/5 text-foreground lg:hidden"
               onClick={() => setIsOpen(!isOpen)}
             >
-              {isOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+              {isOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
             </Button>
           </div>
 
           {/* Centered Logo */}
           <div className="flex justify-center">
             <Link href="/" className="flex items-center group">
-              <h2 className="text-foreground text-xl lg:text-3xl font-display font-black leading-tight tracking-[0.2em] uppercase transition-colors group-hover:text-primary text-center">
+              <h2 className="text-foreground text-2xl lg:text-4xl font-display font-black leading-tight tracking-[0.2em] uppercase transition-colors group-hover:text-primary text-center">
                 Sumegha
               </h2>
             </Link>
           </div>
 
           {/* Right Icons */}
-          <div className="flex justify-end items-center gap-1 md:gap-4">
+          <div className="flex justify-end items-center gap-2 md:gap-6">
             <Link href="/wishlist">
-              <Button variant="ghost" size="icon" className="rounded-full hover:bg-black/5 text-foreground relative h-10 w-10 transition-transform hover:scale-110">
-                <Heart className="h-5 w-5" />
+              <Button variant="ghost" size="icon" className="rounded-full hover:bg-black/5 text-foreground relative h-12 w-12 transition-transform hover:scale-110">
+                <Heart className="h-6 w-6" />
                 {wishlist.length > 0 && (
-                  <span className="absolute top-1.5 right-1.5 flex h-3.5 w-3.5 items-center justify-center rounded-full bg-primary text-[7px] font-bold text-white border-2 border-white">
+                  <span className="absolute top-2 right-2 flex h-4 w-4 items-center justify-center rounded-full bg-primary text-[8px] font-bold text-white border-2 border-white">
                     {wishlist.length}
                   </span>
                 )}
               </Button>
             </Link>
             <Link href="/cart">
-              <Button variant="ghost" size="icon" className="rounded-full hover:bg-black/5 text-foreground relative h-10 w-10 transition-transform hover:scale-110">
-                <ShoppingBag className="h-5 w-5" />
+              <Button variant="ghost" size="icon" className="rounded-full hover:bg-black/5 text-foreground relative h-12 w-12 transition-transform hover:scale-110">
+                <ShoppingBag className="h-6 w-6" />
                 {cart.length > 0 && (
-                  <span className="absolute top-1.5 right-1.5 flex h-3.5 w-3.5 items-center justify-center rounded-full bg-primary text-[7px] font-bold text-white border-2 border-white">
+                  <span className="absolute top-2 right-2 flex h-4 w-4 items-center justify-center rounded-full bg-primary text-[8px] font-bold text-white border-2 border-white">
                     {cart.length}
                   </span>
                 )}
@@ -70,14 +71,15 @@ export function Header() {
         </div>
 
         {/* Desktop Bottom Row: Centered Menu */}
-        <nav className="hidden lg:flex items-center justify-center space-x-12 mt-4 pt-2 border-t border-gray-50">
+        <nav className="hidden lg:flex items-center justify-center space-x-12 mt-6 pt-4 border-t border-gray-50">
           {navLinks.map((link) => (
             <Link 
               key={link.name} 
               href={link.href}
-              className="text-[10px] font-bold uppercase tracking-[0.25em] text-foreground/60 hover:text-primary transition-all"
+              className="text-[11px] font-bold uppercase tracking-[0.3em] text-foreground/60 hover:text-primary transition-all relative group"
             >
               {link.name}
+              <span className="absolute -bottom-1 left-0 w-0 h-[1.5px] bg-primary transition-all group-hover:w-full"></span>
             </Link>
           ))}
         </nav>
@@ -92,7 +94,7 @@ export function Header() {
                 key={link.name} 
                 href={link.href} 
                 onClick={() => setIsOpen(false)}
-                className="text-xs font-bold uppercase tracking-[0.3em] text-foreground hover:text-primary transition-all"
+                className="text-sm font-bold uppercase tracking-[0.3em] text-foreground hover:text-primary transition-all"
               >
                 {link.name}
               </Link>

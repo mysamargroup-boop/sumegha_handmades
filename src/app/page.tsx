@@ -104,7 +104,7 @@ export default function Home() {
   return (
     <div className="flex flex-col w-full overflow-hidden">
       {/* Hero Slider Section */}
-      <section className="relative w-full h-[65vh] min-h-[450px] overflow-hidden">
+      <section className="relative w-full h-[75vh] min-h-[500px] overflow-hidden">
         <Carousel 
           setApi={setApi}
           plugins={[plugin.current]}
@@ -118,49 +118,49 @@ export default function Home() {
                     src={slide.image}
                     alt={slide.title}
                     fill
-                    className="object-cover opacity-20"
+                    className="object-cover opacity-25"
                     priority
                   />
                 </div>
                 <div className="relative z-10 h-full flex items-center justify-center py-10 px-6">
-                  <div className="container-normal flex flex-col items-center text-center space-y-6">
-                    <div className="inline-block px-4 py-1.5 rounded-full border border-primary/20 text-[8px] font-bold uppercase tracking-[0.3em] text-primary bg-primary/5">
+                  <div className="container-normal flex flex-col items-center text-center space-y-8">
+                    <div className="inline-block px-4 py-1.5 rounded-full border border-primary/20 text-[10px] font-bold uppercase tracking-[0.4em] text-primary bg-primary/5 backdrop-blur-sm">
                       {slide.badge}
                     </div>
-                    <div className="space-y-1">
-                      <h1 className="text-4xl lg:text-7xl font-black leading-none uppercase tracking-tighter text-foreground">
+                    <div className="space-y-2">
+                      <h1 className="text-5xl lg:text-8xl font-black leading-none uppercase tracking-tighter text-foreground">
                         {slide.title}
                       </h1>
-                      <h2 className="text-4xl lg:text-7xl font-black leading-none uppercase tracking-tighter text-primary">
+                      <h2 className="text-5xl lg:text-8xl font-black leading-none uppercase tracking-tighter text-primary">
                         {slide.highlight}
                       </h2>
                     </div>
-                    <p className="text-sm lg:text-lg text-foreground/70 font-light max-w-xl mx-auto leading-relaxed">
+                    <p className="text-base lg:text-xl text-foreground/70 font-light max-w-2xl mx-auto leading-relaxed">
                       {slide.desc}
                     </p>
-                    <div className="flex flex-col items-center gap-6 w-full max-w-md mx-auto">
-                      <div className="flex flex-col sm:flex-row items-center justify-center gap-3 w-full">
+                    <div className="flex flex-col items-center gap-8 w-full max-w-md mx-auto">
+                      <div className="flex flex-col sm:flex-row items-center justify-center gap-4 w-full">
                         <Link href="/products" className="w-full">
-                          <Button className="w-full h-12 px-8 rounded-xl text-[10px] font-bold uppercase tracking-widest gradient-primary">
+                          <Button className="w-full h-14 px-10 rounded-xl text-[11px] font-bold uppercase tracking-widest gradient-primary">
                             View Collection
                           </Button>
                         </Link>
                         <Button 
                           variant="secondary" 
-                          className="w-full h-12 px-8 rounded-xl text-[10px] font-bold uppercase tracking-widest bg-white border border-gray-100 shadow-sm flex items-center justify-center gap-2 group hover:bg-gray-50"
+                          className="w-full h-14 px-10 rounded-xl text-[11px] font-bold uppercase tracking-widest bg-white border border-gray-100 shadow-sm flex items-center justify-center gap-3 group hover:bg-gray-50"
                           onClick={() => window.open('https://wa.me/919876543210', '_blank')}
                         >
-                          <WhatsAppIcon className="h-4 w-4 text-green-600" />
+                          <WhatsAppIcon className="h-5 w-5 text-green-600" />
                           WhatsApp Order
                         </Button>
                       </div>
 
-                      {/* Autoplay Loading Indicators - Positioned below buttons as requested */}
-                      <div className="flex gap-2 z-20">
+                      {/* Autoplay Loading Indicators */}
+                      <div className="flex gap-3 z-20">
                         {Array.from({ length: count }).map((_, i) => (
                           <button
                             key={i}
-                            className="relative h-1 w-8 bg-primary/10 rounded-full overflow-hidden"
+                            className="relative h-1.5 w-12 bg-primary/10 rounded-full overflow-hidden"
                             onClick={() => api?.scrollTo(i)}
                             aria-label={`Go to slide ${i + 1}`}
                           >
@@ -182,19 +182,19 @@ export default function Home() {
         </Carousel>
       </section>
 
-      {/* Collections Rounded Slider */}
-      <section className="py-10 bg-white/30 backdrop-blur-sm border-b border-white">
+      {/* Collections Slider */}
+      <section className="py-12 bg-white/30 backdrop-blur-sm border-b border-white">
         <div className="container-normal">
-          <div className="flex flex-col items-center text-center gap-2 mb-8">
-            <h4 className="text-[9px] font-bold uppercase tracking-[0.4em] text-primary">Browse</h4>
-            <h2 className="text-2xl lg:text-3xl font-black uppercase tracking-tight">Explore Collections</h2>
+          <div className="flex flex-col items-center text-center gap-2 mb-10">
+            <h4 className="text-[10px] font-bold uppercase tracking-[0.4em] text-primary">Browse By</h4>
+            <h2 className="text-3xl lg:text-4xl font-black uppercase tracking-tight">Explore Collections</h2>
           </div>
           <Carousel opts={{ align: "start", loop: true }} className="w-full">
             <CarouselContent className="-ml-4">
               {categories.map((cat, index) => (
                 <CarouselItem key={index} className="pl-4 basis-1/3 sm:basis-1/4 md:basis-1/5 lg:basis-1/6">
-                  <Link href={`/products?category=${cat.name}`} className="group block text-center space-y-2">
-                    <div className="relative aspect-square rounded-full overflow-hidden border-2 border-white shadow-md transition-all duration-500 group-hover:scale-105 group-hover:border-primary/20">
+                  <Link href={`/products?category=${cat.name}`} className="group block text-center space-y-4">
+                    <div className="relative aspect-square rounded-full overflow-hidden border-2 border-white shadow-lg transition-all duration-500 group-hover:scale-105 group-hover:border-primary/30">
                       <Image 
                         src={cat.image} 
                         alt={cat.name} 
@@ -203,7 +203,7 @@ export default function Home() {
                       />
                       <div className="absolute inset-0 bg-black/5 group-hover:bg-transparent transition-colors duration-300" />
                     </div>
-                    <span className="block text-[8px] font-black uppercase tracking-[0.2em] text-foreground/60 group-hover:text-primary transition-colors">
+                    <span className="block text-[10px] font-black uppercase tracking-[0.2em] text-foreground/60 group-hover:text-primary transition-colors">
                       {cat.name}
                     </span>
                   </Link>
@@ -215,19 +215,19 @@ export default function Home() {
       </section>
 
       {/* Featured Works Grid */}
-      <section className="py-12">
+      <section className="py-20">
         <div className="container-normal">
-          <div className="flex flex-col md:flex-row md:items-end justify-between mb-8 gap-3 px-2">
-            <div className="space-y-1 text-center md:text-left">
-              <h4 className="text-[9px] font-bold uppercase tracking-[0.3em] text-primary">Gallery</h4>
-              <h2 className="text-2xl lg:text-3xl font-black uppercase tracking-tight text-foreground">Featured Works</h2>
+          <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-4">
+            <div className="space-y-2 text-center md:text-left">
+              <h4 className="text-[10px] font-bold uppercase tracking-[0.4em] text-primary">Artisanal Gallery</h4>
+              <h2 className="text-3xl lg:text-5xl font-black uppercase tracking-tight text-foreground">Featured Works</h2>
             </div>
-            <Link href="/products" className="text-foreground text-[9px] font-bold uppercase tracking-[0.2em] border-b border-primary/20 pb-0.5 hover:border-primary transition-all">
+            <Link href="/products" className="text-foreground text-[10px] font-bold uppercase tracking-[0.3em] border-b-2 border-primary/20 pb-1 hover:border-primary transition-all">
               See All Gallery
             </Link>
           </div>
           
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4 lg:gap-6">
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-6">
             {featuredProducts.map((product) => (
               <ProductCard key={product.id} product={product} />
             ))}
@@ -235,61 +235,40 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Trending Slider Section (Second Slider) */}
-      <section className="py-12 bg-white/50 border-y border-white">
-        <div className="container-normal">
-          <div className="text-center mb-10 space-y-1">
-            <h4 className="text-[9px] font-bold uppercase tracking-[0.3em] text-primary">Trending Now</h4>
-            <h2 className="text-2xl lg:text-3xl font-black uppercase tracking-tight text-foreground">Most Loved Pieces</h2>
-          </div>
-          <Carousel 
-            opts={{ align: "start", loop: true }}
-            className="w-full"
-          >
-            <CarouselContent className="-ml-4">
-              {featuredProducts.concat(featuredProducts).map((product, index) => (
-                <CarouselItem key={`${product.id}-${index}`} className="pl-4 basis-1/2 sm:basis-1/3 lg:basis-1/5">
-                  <ProductCard product={product} />
-                </CarouselItem>
-              ))}
-            </CarouselContent>
-          </Carousel>
-        </div>
-      </section>
-
       {/* Philosophy Section */}
-      <section className="py-12">
+      <section className="py-20 bg-white/40 border-y border-white">
         <div className="container-normal">
-          <div className="bg-white p-8 lg:p-12 rounded-[2.5rem] shadow-sm text-center border border-gray-100 space-y-4">
-            <PanelsTopLeft className="h-6 w-6 text-primary/30 mx-auto" />
-            <h4 className="text-[9px] font-bold uppercase tracking-[0.3em] text-primary">The Philosophy</h4>
-            <p className="text-foreground/70 text-base md:text-xl leading-relaxed font-light italic max-w-2xl mx-auto">
+          <div className="bg-white p-12 lg:p-20 rounded-[3rem] shadow-xl text-center border border-primary/5 space-y-6 relative overflow-hidden">
+            <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-primary/20 to-transparent"></div>
+            <PanelsTopLeft className="h-8 w-8 text-primary/40 mx-auto" />
+            <h4 className="text-[11px] font-bold uppercase tracking-[0.5em] text-primary">The Art Philosophy</h4>
+            <p className="text-foreground/80 text-xl md:text-3xl leading-relaxed font-light italic max-w-4xl mx-auto">
               "Rooted in contemporary aesthetics and traditional soul, we believe in the power of handmade elements to transform spaces into personal sanctuaries of elegance."
             </p>
-            <div className="w-10 h-[1px] bg-primary/30 mx-auto mt-4"></div>
+            <div className="w-16 h-[1.5px] bg-primary/30 mx-auto mt-8"></div>
           </div>
         </div>
       </section>
 
-      {/* Experience Section */}
-      <section className="py-12 bg-secondary/30">
+      {/* Experience Section (Updated to match screenshot) */}
+      <section className="py-24">
         <div className="container-normal">
-          <h4 className="text-[9px] font-bold text-center mb-8 uppercase tracking-[0.5em] text-primary">The Experience</h4>
-          <div className="grid grid-cols-3 gap-4 md:gap-12">
+          <h4 className="text-[12px] font-bold text-center mb-16 uppercase tracking-[0.6em] text-primary">The Experience</h4>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-12 lg:gap-24">
             {[
-              { id: '01', title: "Curate", desc: "Select from our gallery of artisan creations.", icon: MousePointer2 },
-              { id: '02', title: "Connect", desc: "Direct consultation via WhatsApp.", icon: WhatsAppIcon },
-              { id: '03', title: "Cherish", desc: "Bespoke delivery crafted for you.", icon: Truck }
-            ].map((step) => {
+              { title: "CURATE", desc: "Select from our gallery of artisan creations.", icon: MousePointer2 },
+              { title: "CONNECT", desc: "Direct consultation via WhatsApp.", icon: WhatsAppIcon },
+              { title: "CHERISH", desc: "Bespoke delivery crafted for you.", icon: Truck }
+            ].map((step, idx) => {
               const Icon = step.icon;
               return (
-                <div key={step.id} className="flex flex-col items-center text-center gap-3 group">
-                  <div className="size-10 md:size-14 rounded-xl border border-primary/10 flex items-center justify-center text-[9px] font-black text-primary bg-white shadow-sm group-hover:bg-primary group-hover:text-white transition-all duration-500">
-                    {typeof Icon === 'string' ? Icon : <Icon className="h-4 w-4 md:h-5 md:w-5 text-primary group-hover:text-white" />}
+                <div key={idx} className="flex flex-col items-center text-center space-y-8 group">
+                  <div className="w-24 h-24 rounded-2xl bg-white shadow-sm border border-primary/10 flex items-center justify-center transition-all duration-500 group-hover:shadow-xl group-hover:scale-105">
+                    {typeof Icon === 'string' ? Icon : <Icon className="h-8 w-8 text-primary" />}
                   </div>
-                  <div className="space-y-1">
-                    <h5 className="font-bold text-[9px] md:text-base uppercase tracking-widest text-foreground leading-tight">{step.title}</h5>
-                    <p className="text-foreground/60 text-[8px] md:text-xs font-light leading-relaxed max-w-[120px] mx-auto hidden sm:block">{step.desc}</p>
+                  <div className="space-y-4">
+                    <h5 className="font-black text-xl lg:text-2xl uppercase tracking-[0.1em] text-foreground">{step.title}</h5>
+                    <p className="text-foreground/50 text-sm lg:text-base font-light leading-relaxed max-w-[200px] mx-auto">{step.desc}</p>
                   </div>
                 </div>
               );
@@ -298,24 +277,46 @@ export default function Home() {
         </div>
       </section>
 
-      {/* AI Assistant CTA */}
-      <section className="py-12">
+      {/* Trending Slider Section */}
+      <section className="py-20 bg-secondary/30">
         <div className="container-normal">
-          <div className="bg-[#181113] text-white p-10 lg:p-16 rounded-[3rem] text-center space-y-6 relative overflow-hidden shadow-2xl">
-            <div className="absolute top-0 right-0 w-40 h-40 opacity-5 -mr-8 -mt-8 pointer-events-none">
+          <div className="text-center mb-16 space-y-2">
+            <h4 className="text-[10px] font-bold uppercase tracking-[0.4em] text-primary">Popular Choices</h4>
+            <h2 className="text-3xl lg:text-4xl font-black uppercase tracking-tight text-foreground">Most Loved Pieces</h2>
+          </div>
+          <Carousel 
+            opts={{ align: "start", loop: true }}
+            className="w-full"
+          >
+            <CarouselContent className="-ml-6">
+              {featuredProducts.concat(featuredProducts).map((product, index) => (
+                <CarouselItem key={`${product.id}-${index}`} className="pl-6 basis-1/2 sm:basis-1/3 lg:basis-1/5">
+                  <ProductCard product={product} />
+                </CarouselItem>
+              ))}
+            </CarouselContent>
+          </Carousel>
+        </div>
+      </section>
+
+      {/* AI Assistant CTA */}
+      <section className="py-20">
+        <div className="container-normal">
+          <div className="bg-[#181113] text-white p-12 lg:p-24 rounded-[4rem] text-center space-y-8 relative overflow-hidden shadow-2xl">
+            <div className="absolute top-0 right-0 w-64 h-64 opacity-5 -mr-16 -mt-16 pointer-events-none">
               <Sparkles className="w-full h-full text-white" />
             </div>
             <div className="space-y-4">
-              <div className="inline-block px-3 py-1 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-[8px] font-bold uppercase tracking-[0.3em] text-white">
-                AI Powered
+              <div className="inline-block px-4 py-1.5 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-[10px] font-bold uppercase tracking-[0.4em] text-white">
+                AI Powered Concierge
               </div>
-              <h3 className="text-2xl lg:text-4xl font-black uppercase tracking-[0.1em] text-white">Ask the Art Concierge</h3>
-              <p className="text-white/60 text-xs lg:text-sm font-light tracking-wide max-w-lg mx-auto leading-relaxed">
-                Not sure which piece fits your aesthetic? Our AI Assistant can curate a selection based on your unique style.
+              <h3 className="text-3xl lg:text-6xl font-black uppercase tracking-tight text-white leading-tight">Your Personal Art Curator</h3>
+              <p className="text-white/60 text-sm lg:text-lg font-light tracking-wide max-w-2xl mx-auto leading-relaxed">
+                Not sure which piece fits your aesthetic? Our AI Assistant can curate a selection based on your unique style and space.
               </p>
             </div>
-            <Link href="/discovery" className="inline-block">
-              <Button className="h-12 px-10 rounded-xl text-[10px] font-bold uppercase tracking-widest gradient-primary border-none text-white">
+            <Link href="/discovery" className="inline-block pt-4">
+              <Button className="h-16 px-12 rounded-xl text-[12px] font-bold uppercase tracking-widest gradient-primary border-none text-white shadow-2xl shadow-primary/30">
                 Start Discovery
               </Button>
             </Link>
