@@ -3,7 +3,7 @@
 import { use, useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { Heart, ShoppingCart, Share2, Star, Sparkles, ChevronRight, Zap } from 'lucide-react';
+import { Heart, ShoppingCart, Share2, Star, Sparkles, ChevronRight, Zap, ShieldCheck, Leaf, Medal } from 'lucide-react';
 import { PlaceHolderImages } from '@/lib/placeholder-images';
 import { useStore } from '@/lib/store';
 import { Button } from '@/components/ui/button';
@@ -113,6 +113,12 @@ export default function ProductDetailPage({ params }: { params: Promise<{ id: st
     { label: "Finish", value: "Glossy Protective Coat" }
   ];
 
+  const artisanBadges = [
+    { icon: Medal, text: "Award Winning Artist", color: "text-amber-500" },
+    { icon: Leaf, text: "Eco-Friendly", color: "text-green-600" },
+    { icon: ShieldCheck, text: "Authenticity Guaranteed", color: "text-blue-500" }
+  ];
+
   return (
     <div className="w-full overflow-x-hidden">
       <div className="container mx-auto px-4 py-8 lg:py-12 max-w-7xl">
@@ -133,9 +139,12 @@ export default function ProductDetailPage({ params }: { params: Promise<{ id: st
                     <div className="relative aspect-[4/5] rounded-2xl overflow-hidden shadow-2xl border-2 border-white bg-white w-full">
                       <Image src={img} alt={product.name} fill className="object-cover" priority={idx === 0} />
                       {idx === 0 && (
-                        <div className="absolute top-4 left-4 z-10">
+                        <div className="absolute top-4 left-4 z-10 flex flex-col gap-2">
                           <Badge className="bg-primary text-white border-none px-3 py-1 rounded-full uppercase tracking-widest text-[9px] font-black shadow-lg">
                             {discount}% OFF
+                          </Badge>
+                          <Badge className="bg-black/50 backdrop-blur-md text-white border-none px-3 py-1 rounded-full uppercase tracking-widest text-[9px] font-black shadow-lg">
+                            BESTSELLER
                           </Badge>
                         </div>
                       )}
@@ -160,11 +169,10 @@ export default function ProductDetailPage({ params }: { params: Promise<{ id: st
                   <div className="flex text-amber-400">
                     {[1, 2, 3, 4, 5].map(s => <Star key={s} className="h-3 w-3 fill-current" />)}
                   </div>
-                  <span className="text-[10px] font-bold text-muted-foreground">(24)</span>
+                  <span className="text-[10px] font-bold text-muted-foreground">(24 reviews)</span>
                 </div>
                 
-                {/* Desktop Utility Icons */}
-                <div className="hidden lg:flex items-center gap-2">
+                <div className="flex items-center gap-2">
                   <Button size="icon" variant="outline" className={cn("h-10 w-10 rounded-full border-primary/10 transition-all", wishlisted ? 'bg-primary/10 text-primary border-primary/20' : 'bg-white hover:bg-primary/5')} onClick={() => wishlisted ? removeFromWishlist(product.id) : addToWishlist(product)}>
                     <Heart className={cn("h-4 w-4", wishlisted && "fill-primary")} />
                   </Button>
@@ -174,25 +182,26 @@ export default function ProductDetailPage({ params }: { params: Promise<{ id: st
                 </div>
               </div>
 
-              <div className="flex items-center justify-between lg:block">
-                <h1 className="text-2xl lg:text-5xl font-black font-headline tracking-tight uppercase leading-tight text-foreground max-w-[70%] lg:max-w-none">
-                  {product.name}
-                </h1>
-                
-                {/* Mobile Icons next to title */}
-                <div className="flex lg:hidden items-center gap-2">
-                  <Button size="icon" variant="outline" className={cn("h-9 w-9 rounded-full border-primary/10 transition-all", wishlisted ? 'bg-primary/10 text-primary border-primary/20' : 'bg-white hover:bg-primary/5')} onClick={() => wishlisted ? removeFromWishlist(product.id) : addToWishlist(product)}>
-                    <Heart className={cn("h-4 w-4", wishlisted && "fill-primary")} />
-                  </Button>
-                  <Button size="icon" variant="outline" className="h-9 w-9 rounded-full border-primary/10 bg-white hover:bg-primary/5 transition-all" onClick={handleShare}>
-                    <Share2 className="h-4 w-4" />
-                  </Button>
-                </div>
-              </div>
+              <h1 className="text-3xl lg:text-5xl font-black font-headline tracking-tight uppercase leading-tight text-foreground">
+                {product.name}
+              </h1>
 
               <div className="flex items-center gap-4">
                 <p className="text-3xl lg:text-5xl font-black font-headline text-primary">₹{product.price}</p>
-                <p className="text-xl lg:text-2xl text-muted-foreground line-through decoration-primary/30 font-bold">₹{product.originalPrice}</p>
+                <p className="text-xl lg:text-2xl text-muted-foreground line-through decoration-primary/30 font-bold italic">₹{product.originalPrice}</p>
+              </div>
+
+              {/* Artisan Badges Section */}
+              <div className="flex flex-wrap gap-4 pt-2">
+                {artisanBadges.map((badge, idx) => {
+                  const Icon = badge.icon;
+                  return (
+                    <div key={idx} className="flex items-center gap-1.5 px-3 py-1.5 bg-white rounded-lg border border-primary/5 shadow-sm">
+                      <Icon className={cn("h-3.5 w-3.5", badge.color)} />
+                      <span className="text-[9px] font-bold uppercase tracking-widest text-foreground/70">{badge.text}</span>
+                    </div>
+                  );
+                })}
               </div>
             </div>
 
@@ -220,7 +229,7 @@ export default function ProductDetailPage({ params }: { params: Promise<{ id: st
                 <Button 
                   size="lg" 
                   variant="outline"
-                  className="h-14 lg:h-16 rounded-2xl text-[10px] font-bold uppercase tracking-widest border-primary text-primary hover:bg-primary/5 flex-1 shadow-sm px-2" 
+                  className="h-14 lg:h-16 rounded-2xl text-[10px] font-bold uppercase tracking-widest border-primary text-primary hover:bg-primary/5 flex-1 shadow-sm" 
                   onClick={() => {addToCart(product); toast({title: "Added to bag", description: product.name});}}
                 >
                   <ShoppingCart className="h-4 w-4 mr-1.5" />
@@ -228,7 +237,7 @@ export default function ProductDetailPage({ params }: { params: Promise<{ id: st
                 </Button>
                 <Button 
                   size="lg" 
-                  className="h-14 lg:h-16 rounded-2xl text-[10px] font-bold uppercase tracking-widest gradient-primary flex-1 shadow-lg shadow-primary/20 px-2 group relative overflow-hidden transition-all hover:scale-[1.02] active:scale-95" 
+                  className="h-14 lg:h-16 rounded-2xl text-[10px] font-bold uppercase tracking-widest gradient-primary flex-1 shadow-lg shadow-primary/20 group relative overflow-hidden transition-all hover:scale-[1.02] active:scale-95" 
                   onClick={() => {addToCart(product); window.location.href = '/cart';}}
                 >
                   <Zap className="h-4 w-4 mr-1.5 group-hover:animate-bounce" />

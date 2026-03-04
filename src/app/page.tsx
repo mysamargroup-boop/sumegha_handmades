@@ -1,4 +1,3 @@
-
 "use client";
 
 import Link from 'next/link';
@@ -72,25 +71,14 @@ export default function Home() {
       { id: "fest-1", name: "Floral Pooja Thali", price: 899, originalPrice: 1200, imageUrl: "https://picsum.photos/seed/pooja/600/600", category: "Festive", tags: ["Bestseller"], rating: 5 },
       { id: "fest-2", name: "Handpainted Diya Set", price: 450, originalPrice: 600, imageUrl: "https://picsum.photos/seed/diya/600/600", category: "Festive", tags: ["New Arrival"], rating: 4 },
       { id: "fest-3", name: "Custom Gift Hamper", price: 1500, originalPrice: 2000, imageUrl: "https://picsum.photos/seed/hamper/600/600", category: "Festive", tags: ["Top Selling"], rating: 5 },
-      { id: "fest-4", name: "Artisan Box", price: 750, originalPrice: 950, imageUrl: "https://picsum.photos/seed/box/600/600", category: "Festive", tags: ["Bestseller"], rating: 4 },
-      { id: "fest-5", name: "Wall Hanging Art", price: 1100, originalPrice: 1400, imageUrl: "https://picsum.photos/seed/hang/600/600", category: "Festive", tags: ["Trending"], rating: 5 },
-      { id: "fest-6", name: "Silver Plated Plate", price: 1999, originalPrice: 2500, imageUrl: "https://picsum.photos/seed/silver/600/600", category: "Festive", tags: ["Premium"], rating: 5 },
     ],
     "Home Decor": [
       { id: "home-1", name: "Lippan Mirror Art", price: 1299, originalPrice: 1800, imageUrl: "https://picsum.photos/seed/lippan/600/600", category: "Home Decor", tags: ["Bestseller"], rating: 5 },
       { id: "home-2", name: "Ceramic Floor Vase", price: 2500, originalPrice: 3500, imageUrl: "https://images.unsplash.com/photo-1631125915732-b98f8774f675?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxMHx8Y2VyYW1pYyUyMHZhc2V8ZW58MHx8fHwxNzcyNTI3MTU5fDA&ixlib=rb-4.1.0&q=80&w=1080", category: "Home Decor", tags: ["Top Selling"], rating: 4 },
-      { id: "home-3", name: "Macrame Wall Decor", price: 850, originalPrice: 1100, imageUrl: "https://picsum.photos/seed/macrame-home/600/600", category: "Home Decor", tags: ["New Arrival"], rating: 5 },
-      { id: "home-4", name: "Abstract Canvas", price: 1800, originalPrice: 2200, imageUrl: "https://picsum.photos/seed/canvas/600/600", category: "Home Decor", tags: ["Trending"], rating: 4 },
-      { id: "home-5", name: "Scented Candle Set", price: 599, originalPrice: 799, imageUrl: "https://picsum.photos/seed/candle-home/600/600", category: "Home Decor", tags: ["Bestseller"], rating: 5 },
-      { id: "home-6", name: "Handwoven Cushion", price: 450, originalPrice: 650, imageUrl: "https://picsum.photos/seed/cushion/600/600", category: "Home Decor", tags: ["Soft Living"], rating: 4 },
     ],
     "Wedding": [
       { id: "wed-1", name: "Bridal Trunk Box", price: 3500, originalPrice: 4500, imageUrl: "https://picsum.photos/seed/trunk/600/600", category: "Wedding", tags: ["Luxury"], rating: 5 },
       { id: "wed-2", name: "Wedding Shagun Envelope", price: 150, originalPrice: 200, imageUrl: "https://picsum.photos/seed/env/600/600", category: "Wedding", tags: ["Top Selling"], rating: 5 },
-      { id: "wed-3", name: "Handmade Wedding Card", price: 250, originalPrice: 350, imageUrl: "https://picsum.photos/seed/card/600/600", category: "Wedding", tags: ["Custom"], rating: 4 },
-      { id: "wed-4", name: "Floral Jewelry Set", price: 999, originalPrice: 1300, imageUrl: "https://picsum.photos/seed/floral/600/600", category: "Wedding", tags: ["Bestseller"], rating: 5 },
-      { id: "wed-5", name: "Traditional Potli", price: 650, originalPrice: 850, imageUrl: "https://picsum.photos/seed/potli/600/600", category: "Wedding", tags: ["New Arrival"], rating: 5 },
-      { id: "wed-6", name: "Shubh Labh Hangings", price: 450, originalPrice: 550, imageUrl: "https://picsum.photos/seed/labh/600/600", category: "Wedding", tags: ["Traditional"], rating: 4 },
     ]
   };
 
@@ -108,6 +96,13 @@ export default function Home() {
       highlight: "TREASURES",
       desc: "Each piece is meticulously handcrafted, ensuring no two items are exactly alike.",
       image: "https://picsum.photos/seed/jewelry-bg/1920/1080",
+    },
+    {
+      badge: "NEW COLLECTION",
+      title: "FESTIVE",
+      highlight: "SPIRIT",
+      desc: "Celebrate traditions with our vibrant new range of festive home decor and unique gifts.",
+      image: "https://picsum.photos/seed/festive-bg/1920/1080",
     }
   ];
 
@@ -221,14 +216,6 @@ export default function Home() {
           "py-16 relative overflow-hidden",
           idx % 2 === 0 ? "bg-white/20" : "bg-white/40"
         )}>
-          <div className="absolute inset-0 z-0 pointer-events-none opacity-5">
-            {idx % 3 === 0 ? (
-              <div className="absolute -right-20 -top-20 w-80 h-80 border-[15px] border-primary rounded-full animate-[spin_40s_linear_infinite]" />
-            ) : (
-              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] border-[1px] border-dashed border-primary rounded-full opacity-10" />
-            )}
-          </div>
-
           <div className="container-normal relative z-10 px-4">
             <div className="flex items-center justify-between mb-8">
               <div className="space-y-1">
@@ -241,44 +228,14 @@ export default function Home() {
               </Link>
             </div>
 
-            <Carousel opts={{ align: "start", loop: true }} className="w-full">
-              <CarouselContent className="-ml-3">
-                {products.slice(0, 6).map((product) => (
-                  <CarouselItem key={product.id} className="pl-3 basis-[50%] md:basis-1/4">
-                    <ProductCard product={product} />
-                  </CarouselItem>
-                ))}
-              </CarouselContent>
-            </Carousel>
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-10">
+              {products.slice(0, 4).map((product) => (
+                <ProductCard key={product.id} product={product} />
+              ))}
+            </div>
           </div>
         </section>
       ))}
-
-      <section className="py-16">
-        <div className="container-normal px-4">
-          <h4 className="text-[10px] font-bold text-center mb-10 uppercase tracking-[0.4em] text-primary">The Art Experience</h4>
-          <div className="grid grid-cols-3 gap-6 sm:gap-24">
-            {[
-              { title: "CURATE", desc: "Select from gallery.", icon: MousePointer2 },
-              { title: "CONNECT", desc: "Consult directly.", icon: WhatsAppIcon },
-              { title: "CHERISH", desc: "Bespoke delivery.", icon: Truck }
-            ].map((step, idx) => {
-              const Icon = step.icon;
-              return (
-                <div key={idx} className="flex flex-col items-center text-center space-y-3 group">
-                  <div className="w-12 h-12 sm:w-16 sm:h-16 rounded-full bg-white shadow-md border border-primary/5 flex items-center justify-center transition-all duration-300 group-hover:scale-110 group-hover:bg-primary/5">
-                    <Icon className="h-4 w-4 sm:h-6 sm:w-6 text-primary stroke-[1.5px]" />
-                  </div>
-                  <div className="space-y-1">
-                    <h5 className="font-black text-[9px] sm:text-xs uppercase tracking-widest text-foreground">{step.title}</h5>
-                    <p className="text-foreground/40 text-[8px] sm:text-[10px] font-light leading-tight">{step.desc}</p>
-                  </div>
-                </div>
-              );
-            })}
-          </div>
-        </div>
-      </section>
 
       <section className="py-16">
         <div className="container-normal px-4">
