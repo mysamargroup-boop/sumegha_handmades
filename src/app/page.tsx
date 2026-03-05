@@ -127,7 +127,7 @@ export default function Home() {
                   />
                 </div>
               </div>
-              <span className="text-[9px] font-black uppercase tracking-widest text-foreground/70 group-hover:text-primary transition-colors text-center w-16 leading-tight truncate">
+              <span className="text-[9px] font-black uppercase tracking-widest text-foreground/70 group-hover:text-primary transition-colors text-center w-16 leading-tight">
                 {cat.name.split(' ')[0]}
               </span>
             </Link>
@@ -168,7 +168,6 @@ export default function Home() {
                   )}>
                     <div className="max-w-4xl w-full flex flex-col items-center space-y-6 sm:space-y-10">
                       <div className="flex flex-col items-center gap-4">
-                        <Sparkles className="h-8 w-8 text-primary animate-pulse" />
                         <div className="inline-block px-5 py-2 rounded-full border border-white/30 text-[10px] font-black uppercase tracking-[0.4em] text-white bg-white/10 backdrop-blur-md">
                           {slide.badge}
                         </div>
@@ -224,7 +223,6 @@ export default function Home() {
             <h4 className="text-[10px] font-bold uppercase tracking-[0.5em] text-primary">Discover Our</h4>
             <h2 className="text-2xl lg:text-5xl font-black uppercase tracking-tight">Artistic Categories</h2>
           </div>
-          {/* Responsive grid: 3 columns on mobile, row/wrap on desktop */}
           <div className="grid grid-cols-3 sm:flex sm:flex-wrap items-center justify-center gap-4 sm:gap-12 pb-6 px-4">
             {categoriesData.categories.map((cat, index) => (
               <Link key={index} href={`/products?category=${encodeURIComponent(cat.name)}`} className="group block text-center space-y-4 w-full sm:w-48">
@@ -379,6 +377,29 @@ export default function Home() {
               ))}
             </CarouselContent>
           </Carousel>
+        </div>
+      </section>
+
+      {/* Signature & Our Story Section */}
+      <section className="py-24 bg-white/40 overflow-hidden">
+        <div className="container-normal px-4 flex flex-col items-center text-center space-y-8">
+           <h2 className="text-7xl lg:text-9xl font-cursive text-primary lowercase tracking-tight drop-shadow-sm select-none">
+             Sumegha
+           </h2>
+           <div className="max-w-2xl space-y-4">
+             <p className="text-[10px] font-black uppercase tracking-[0.4em] text-foreground/40">The Heart Behind the Art</p>
+             <p className="text-xl lg:text-3xl font-light text-foreground/80 leading-relaxed italic">
+               "Every piece I craft carries a fragment of my soul and a whisper of tradition."
+             </p>
+             <p className="text-sm lg:text-base text-foreground/60 leading-relaxed font-medium">
+               What started as a simple desire to preserve the warmth of human touch has evolved into a legacy of craftsmanship. Our work is a celebration of patience, precision, and the beautiful imperfections of the handmade process.
+             </p>
+           </div>
+           <Link href="/about">
+             <Button variant="link" className="text-primary font-black uppercase tracking-widest text-[10px] border-b border-primary/20 pb-1 h-auto">
+               Read Our Full Story
+             </Button>
+           </Link>
         </div>
       </section>
 
