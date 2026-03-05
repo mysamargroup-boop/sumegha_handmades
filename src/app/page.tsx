@@ -120,7 +120,7 @@ export default function Home() {
           <CarouselContent className="ml-0">
             {heroSlides.map((slide, index) => (
               <CarouselItem key={index} className="relative pl-0">
-                <div className="relative h-[65vh] sm:h-[75vh] min-h-[550px] w-full rounded-2xl overflow-hidden shadow-2xl bg-black/5 border border-white/20">
+                <div className="relative h-[65vh] sm:h-[75vh] min-h-[550px] w-full rounded-2xl overflow-hidden bg-black/5 border border-white/20">
                   <div className="absolute inset-0 z-0">
                     <Image 
                       src={slide.image}
@@ -224,7 +224,7 @@ export default function Home() {
         </div>
         
         <Carousel 
-          setApi={setSpotlightApi}
+          setApi={setApi}
           plugins={[spotlightPlugin.current]}
           opts={{ align: "center", loop: true }}
           className="w-full max-w-[1440px] mx-auto"
@@ -235,7 +235,7 @@ export default function Home() {
               return (
                 <CarouselItem key={index} className="pl-4 sm:pl-8 basis-[80%] sm:basis-[60%] lg:basis-[45%]">
                   <div className={cn(
-                    "relative aspect-square sm:aspect-video rounded-[2.5rem] overflow-hidden transition-all duration-700 border-4 border-white shadow-2xl",
+                    "relative aspect-square sm:aspect-video rounded-[2.5rem] overflow-hidden transition-all duration-700 border-4 border-white",
                     isActive ? "scale-100 blur-0 opacity-100" : "scale-90 blur-md opacity-40"
                   )}>
                     <Image src={slide.url} alt={slide.title} fill className="object-cover" />
@@ -285,10 +285,14 @@ export default function Home() {
       <section className="py-24 bg-white/40">
         <div className="container-normal px-4">
           <div className="text-center mb-16 space-y-6">
-            <div className="inline-flex items-center gap-3 text-primary text-[11px] font-black uppercase tracking-[0.6em]">
+            <Link 
+              href="https://instagram.com/sumegha_handmades" 
+              target="_blank" 
+              className="inline-flex items-center gap-3 text-primary text-[11px] font-black uppercase tracking-[0.6em] hover:opacity-80 transition-opacity"
+            >
               <Instagram className="h-5 w-5" />
               @sumegha_handmades
-            </div>
+            </Link>
             <h2 className="text-3xl lg:text-6xl font-black uppercase tracking-tight">On the Gram</h2>
             <p className="text-foreground/50 text-base max-w-xl mx-auto leading-relaxed">Follow our creative journey and see how our art comes to life in homes around the world.</p>
           </div>
