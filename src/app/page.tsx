@@ -1,3 +1,4 @@
+
 "use client";
 
 import Link from 'next/link';
@@ -138,27 +139,27 @@ export default function Home() {
                   </div>
 
                   <div className={cn(
-                    "relative z-10 h-full flex items-center justify-center p-8 text-center transition-all duration-1000 delay-300",
-                    current === index ? "opacity-100 translate-y-0 blur-0" : "opacity-0 translate-y-4 blur-sm"
+                    "relative z-10 h-full flex items-center justify-center p-8 text-center transition-all duration-1000",
+                    current === index ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
                   )}>
                     <div className="max-w-4xl w-full flex flex-col items-center space-y-6 sm:space-y-8">
                       <div className="inline-block px-5 py-2 rounded-full border border-white/30 text-[10px] font-black uppercase tracking-[0.4em] text-white bg-white/10 backdrop-blur-md">
                         {slide.badge}
                       </div>
                       <div className="space-y-4">
-                        <h1 className="text-4xl sm:text-8xl font-black leading-none uppercase tracking-tighter text-white drop-shadow-2xl">
+                        <h1 className="text-4xl sm:text-8xl font-black leading-none uppercase tracking-tighter text-white drop-shadow-sm">
                           {slide.title}
                         </h1>
-                        <h2 className="text-4xl sm:text-8xl font-black leading-none uppercase tracking-tighter text-primary drop-shadow-2xl">
+                        <h2 className="text-4xl sm:text-8xl font-black leading-none uppercase tracking-tighter text-primary drop-shadow-sm">
                           {slide.highlight}
                         </h2>
                       </div>
-                      <p className="text-sm sm:text-2xl text-white/90 font-light leading-relaxed max-w-2xl drop-shadow-lg px-4">
+                      <p className="text-sm sm:text-2xl text-white/90 font-light leading-relaxed max-w-2xl drop-shadow-md px-4">
                         {slide.desc}
                       </p>
                       <div className="pt-6 sm:pt-10">
                         <Link href={`/products?category=${encodeURIComponent(slide.categoryName)}`}>
-                          <Button className="h-12 sm:h-16 px-8 sm:px-14 rounded-2xl text-[10px] sm:text-[11px] font-black uppercase tracking-[0.3em] gradient-primary border-none shadow-2xl shadow-primary/50 active:scale-95 transition-all hover:scale-105">
+                          <Button className="h-12 sm:h-16 px-8 sm:px-14 rounded-2xl text-[10px] sm:text-[11px] font-black uppercase tracking-[0.3em] gradient-primary border-none shadow-none active:scale-95 transition-all hover:scale-105">
                             Shop {slide.categoryName}
                           </Button>
                         </Link>
@@ -198,7 +199,7 @@ export default function Home() {
           <div className="grid grid-cols-3 sm:flex sm:flex-wrap items-center justify-center gap-4 sm:gap-12 pb-6 px-4">
             {categoriesData.categories.map((cat, index) => (
               <Link key={index} href={`/products?category=${encodeURIComponent(cat.name)}`} className="group block text-center space-y-4 w-full sm:w-48">
-                <div className="relative aspect-square rounded-2xl overflow-hidden border-2 border-white shadow-md transition-all duration-500 group-hover:scale-105 group-hover:shadow-xl group-hover:border-primary/20">
+                <div className="relative aspect-square rounded-2xl overflow-hidden border-2 border-white shadow-none transition-all duration-500 group-hover:scale-105 group-hover:border-primary/20">
                   <Image 
                     src={cat.imageUrl} 
                     alt={cat.name} 
@@ -224,7 +225,7 @@ export default function Home() {
         </div>
         
         <Carousel 
-          setApi={setApi}
+          setApi={setSpotlightApi}
           plugins={[spotlightPlugin.current]}
           opts={{ align: "center", loop: true }}
           className="w-full max-w-[1440px] mx-auto"
@@ -235,7 +236,7 @@ export default function Home() {
               return (
                 <CarouselItem key={index} className="pl-4 sm:pl-8 basis-[80%] sm:basis-[60%] lg:basis-[45%]">
                   <div className={cn(
-                    "relative aspect-square sm:aspect-video rounded-[2.5rem] overflow-hidden transition-all duration-700 border-4 border-white",
+                    "relative aspect-square sm:aspect-video rounded-[2.5rem] overflow-hidden transition-all duration-700 border-4 border-white shadow-none",
                     isActive ? "scale-100 blur-0 opacity-100" : "scale-90 blur-md opacity-40"
                   )}>
                     <Image src={slide.url} alt={slide.title} fill className="object-cover" />
@@ -299,7 +300,7 @@ export default function Home() {
           
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3">
             {instagramPosts.map((post, i) => (
-              <a key={i} href="https://instagram.com/sumegha_handmades" target="_blank" className="relative aspect-square group overflow-hidden rounded-2xl shadow-sm hover:shadow-xl transition-all">
+              <a key={i} href="https://instagram.com/sumegha_handmades" target="_blank" className="relative aspect-square group overflow-hidden rounded-2xl shadow-none hover:shadow-xl transition-all">
                 <Image 
                   src={post.imageUrl} 
                   alt={`Instagram post ${i + 1}`} 
