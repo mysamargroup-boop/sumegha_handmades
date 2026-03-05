@@ -10,21 +10,39 @@ import { Skeleton } from '@/components/ui/skeleton';
 import productsData from "@/lib/products.json";
 import categoriesData from "@/lib/categories.json";
 import { Product } from "@/lib/types";
+import { getAllProducts, getAllCategories, type SanityCategory } from "@/sanity/lib/queries";
 
 export default function ProductGrid() {
   const searchParams = useSearchParams();
   const categoryParam = searchParams.get('category');
   const searchModeParam = searchParams.get('search');
-  
+
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedCategory, setSelectedCategory] = useState(categoryParam || 'All');
   const [isLoading, setIsLoading] = useState(true);
   const searchInputRef = useRef<HTMLInputElement>(null);
 
+  // Sanity data states
+  const [sanityProducts, setSanityProducts] = useState<Product[] | null>(null);
+  const [sanityCategories, setSanityCategories] = useState<SanityCategory[] | null>(null);
+
   useEffect(() => {
-    // Artificial delay to show beautiful skeletons
-    const timer = setTimeout(() => setIsLoading(false), 1200);
-    return () => clearTimeout(timer);
+    async function fetchSanityData() {
+      try {
+        const [products, cats] = await Promise.all([
+          getAllProducts(),
+          getAllCategories(),
+        ]);
+        if (products && products.length > 0) setSanityProducts(products);
+        if (cats && cats.length > 0) setSanityCategories(cats);
+      } catch (error) {
+        console.log("Sanity product fetch failed, using local data:", error);
+      } finally {
+        // Small delay to show skeleton
+        setTimeout(() => setIsLoading(false), 600);
+      }
+    }
+    fetchSanityData();
   }, []);
 
   useEffect(() => {
@@ -33,14 +51,17 @@ export default function ProductGrid() {
     }
   }, [searchModeParam]);
 
-  const categories = ['All', ...categoriesData.categories.map(c => c.name)];
+  const categories = ['All', ...(sanityCategories
+    ? sanityCategories.map(c => c.name)
+    : categoriesData.categories.map(c => c.name)
+  )];
 
-  const allProducts = useMemo(() => productsData.products as Product[], []);
+  const allProducts = useMemo(() => sanityProducts || productsData.products as Product[], [sanityProducts]);
 
   const filteredProducts = allProducts.filter(p => {
     const matchesCategory = selectedCategory === 'All' || p.category === selectedCategory;
-    const matchesSearch = p.name.toLowerCase().includes(searchTerm.toLowerCase()) || 
-                          p.description.toLowerCase().includes(searchTerm.toLowerCase());
+    const matchesSearch = p.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      p.description.toLowerCase().includes(searchTerm.toLowerCase());
     return matchesCategory && matchesSearch;
   });
 
@@ -53,13 +74,13 @@ export default function ProductGrid() {
             <h1 className="text-3xl lg:text-6xl font-black font-headline uppercase tracking-tight">Art Gallery</h1>
             <p className="text-muted-foreground text-sm lg:text-lg max-w-md mx-auto font-light">Hand-picked treasures waiting for a home.</p>
           </div>
-          
+
           <div className="flex flex-col gap-8 w-full max-w-3xl">
             <div className="relative group max-w-2xl mx-auto w-full">
               <Search className="absolute left-4 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground transition-colors group-focus-within:text-primary pointer-events-none" />
-              <input 
+              <input
                 ref={searchInputRef}
-                placeholder="Search unique art..." 
+                placeholder="Search unique art..."
                 className="w-full pl-12 pr-12 h-14 rounded-2xl border border-primary/10 bg-white/50 backdrop-blur-sm focus:bg-white shadow-sm outline-none px-4 transition-all"
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
@@ -72,13 +93,13 @@ export default function ProductGrid() {
                 {categories.map(cat => {
                   const isActive = selectedCategory === cat;
                   return (
-                    <Button 
-                      key={cat} 
+                    <Button
+                      key={cat}
                       variant="ghost"
                       className={cn(
                         "rounded-full h-11 px-8 text-[10px] font-black uppercase tracking-widest transition-all shrink-0 border border-transparent",
-                        isActive 
-                          ? "bg-primary text-white shadow-lg shadow-primary/30" 
+                        isActive
+                          ? "bg-primary text-white shadow-lg shadow-primary/30"
                           : "bg-[#FDF6F9] text-foreground/80 hover:bg-primary/5"
                       )}
                       onClick={() => setSelectedCategory(cat)}
@@ -124,9 +145,9 @@ export default function ProductGrid() {
               <p className="text-xl font-black uppercase tracking-tight">No Results Found</p>
               <p className="text-muted-foreground text-xs font-light max-w-xs mx-auto">Try adjusting your filters or search terms.</p>
             </div>
-            <Button 
-              variant="link" 
-              onClick={() => {setSearchTerm(''); setSelectedCategory('All');}} 
+            <Button
+              variant="link"
+              onClick={() => { setSearchTerm(''); setSelectedCategory('All'); }}
               className="text-primary font-black uppercase tracking-widest text-[10px]"
             >
               Clear all filters

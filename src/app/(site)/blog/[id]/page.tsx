@@ -1,16 +1,37 @@
 "use client";
 
-import { use } from 'react';
+import { use, useState, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { ArrowLeft, Calendar, User, Share2, Heart } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { getBlogPostBySlug, getBlogPostById, type SanityBlogPost } from '@/sanity/lib/queries';
+import { PortableText } from 'next-sanity';
+import { format } from 'date-fns';
 
 export default function BlogDetailPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = use(params);
+  const [sanityBlog, setSanityBlog] = useState<SanityBlogPost | null>(null);
+  const [loading, setLoading] = useState(true);
 
-  // Mock data matching the listing page
-  const blogs = [
+  useEffect(() => {
+    async function fetchBlog() {
+      try {
+        // Try by slug first, then by ID
+        let post = await getBlogPostBySlug(id);
+        if (!post) post = await getBlogPostById(id);
+        if (post) setSanityBlog(post);
+      } catch (error) {
+        console.log("Sanity blog detail fetch failed:", error);
+      } finally {
+        setLoading(false);
+      }
+    }
+    fetchBlog();
+  }, [id]);
+
+  // Fallback blog data
+  const fallbackBlogs = [
     {
       id: "1",
       title: "The Soul of Handmade: Why It Matters",
@@ -40,7 +61,21 @@ export default function BlogDetailPage({ params }: { params: Promise<{ id: strin
     }
   ];
 
-  const blog = blogs.find(b => b.id === id) || blogs[0];
+  // Use Sanity blog or fallback
+  const blog = sanityBlog
+    ? {
+      title: sanityBlog.title,
+      content: sanityBlog.content, // Portable Text array
+      author: sanityBlog.author || 'Sumegha',
+      date: sanityBlog.publishedAt ? format(new Date(sanityBlog.publishedAt), 'MMMM dd, yyyy') : '',
+      category: sanityBlog.category || '',
+      image: sanityBlog.coverImageUrl || '',
+      isPortableText: true,
+    }
+    : (() => {
+      const fallback = fallbackBlogs.find(b => b.id === id) || fallbackBlogs[0];
+      return { ...fallback, isPortableText: false };
+    })();
 
   return (
     <div className="min-h-screen pb-24">
@@ -60,7 +95,7 @@ export default function BlogDetailPage({ params }: { params: Promise<{ id: strin
             <h1 className="text-3xl lg:text-6xl font-black uppercase tracking-tight text-foreground leading-tight">
               {blog.title}
             </h1>
-            
+
             <div className="flex flex-wrap items-center justify-center lg:justify-start gap-8 text-[11px] font-bold uppercase tracking-widest text-foreground/40">
               <div className="flex items-center gap-2">
                 <Calendar className="h-4 w-4" />
@@ -74,10 +109,10 @@ export default function BlogDetailPage({ params }: { params: Promise<{ id: strin
           </div>
 
           <div className="relative aspect-[21/9] rounded-[3rem] overflow-hidden shadow-2xl border-4 border-white">
-            <Image 
-              src={blog.image} 
-              alt={blog.title} 
-              fill 
+            <Image
+              src={blog.image}
+              alt={blog.title}
+              fill
               className="object-cover"
               priority
             />
@@ -86,11 +121,17 @@ export default function BlogDetailPage({ params }: { params: Promise<{ id: strin
           <div className="flex flex-col lg:flex-row gap-12 pt-8">
             <div className="flex-grow space-y-8">
               <div className="prose prose-pink max-w-none">
-                <p className="text-lg lg:text-xl text-foreground/70 leading-relaxed font-light whitespace-pre-line">
-                  {blog.content}
-                </p>
+                {blog.isPortableText && blog.content ? (
+                  <div className="text-lg lg:text-xl text-foreground/70 leading-relaxed font-light">
+                    <PortableText value={blog.content} />
+                  </div>
+                ) : (
+                  <p className="text-lg lg:text-xl text-foreground/70 leading-relaxed font-light whitespace-pre-line">
+                    {typeof blog.content === 'string' ? blog.content : ''}
+                  </p>
+                )}
               </div>
-              
+
               <div className="flex items-center gap-4 pt-8">
                 <Button variant="outline" className="rounded-full border-primary/10 hover:bg-primary/5">
                   <Heart className="h-4 w-4 mr-2" />

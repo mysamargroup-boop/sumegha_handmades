@@ -6,9 +6,27 @@ import { Calendar, User } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import placeholderData from '@/lib/placeholder-images.json';
+import * as React from 'react';
+import { getAllBlogPosts, type SanityBlogPost } from '@/sanity/lib/queries';
+import { format } from 'date-fns';
 
 export default function BlogPage() {
-  const blogPosts = [
+  const [sanityBlogs, setSanityBlogs] = React.useState<SanityBlogPost[] | null>(null);
+
+  React.useEffect(() => {
+    async function fetchBlogs() {
+      try {
+        const posts = await getAllBlogPosts();
+        if (posts && posts.length > 0) setSanityBlogs(posts);
+      } catch (error) {
+        console.log("Sanity blog fetch failed, using fallback:", error);
+      }
+    }
+    fetchBlogs();
+  }, []);
+
+  // Fallback blog posts
+  const fallbackBlogPosts = [
     {
       id: "1",
       title: "The Soul of Handmade: Why It Matters",
@@ -38,13 +56,24 @@ export default function BlogPage() {
     }
   ];
 
-  const blogs = blogPosts.map(blog => {
-    const imageData = placeholderData.placeholderImages.find(img => img.id === blog.imageId);
-    return {
-      ...blog,
-      image: imageData ? imageData.imageUrl : ''
-    };
-  });
+  // If Sanity blogs available, use them; otherwise use fallback
+  const blogs = sanityBlogs
+    ? sanityBlogs.map(blog => ({
+      id: blog.slug || blog.id,
+      title: blog.title,
+      excerpt: blog.excerpt,
+      author: blog.author || 'Sumegha',
+      date: blog.publishedAt ? format(new Date(blog.publishedAt), 'MMMM dd, yyyy') : '',
+      category: blog.category || '',
+      image: blog.coverImageUrl || '',
+    }))
+    : fallbackBlogPosts.map(blog => {
+      const imageData = placeholderData.placeholderImages.find(img => img.id === blog.imageId);
+      return {
+        ...blog,
+        image: imageData ? imageData.imageUrl : ''
+      };
+    });
 
   const heroPattern = placeholderData.placeholderImages.find(img => img.id === 'hero-pattern');
 
@@ -63,10 +92,10 @@ export default function BlogPage() {
           {blogs.map((blog) => (
             <Link key={blog.id} href={`/blog/${blog.id}`} className="group bg-white rounded-[2.5rem] overflow-hidden shadow-sm hover:shadow-2xl transition-all duration-500 border border-primary/5 block">
               <div className="relative aspect-[4/3] overflow-hidden">
-                <Image 
-                  src={blog.image} 
-                  alt={blog.title} 
-                  fill 
+                <Image
+                  src={blog.image}
+                  alt={blog.title}
+                  fill
                   className="object-cover transition-transform duration-700 group-hover:scale-105"
                 />
                 <div className="absolute top-6 left-6">
@@ -75,7 +104,7 @@ export default function BlogPage() {
                   </span>
                 </div>
               </div>
-              
+
               <div className="p-8 lg:p-10 space-y-6">
                 <div className="flex items-center gap-6 text-[10px] font-bold uppercase tracking-widest text-foreground/40">
                   <div className="flex items-center gap-2">
@@ -91,7 +120,7 @@ export default function BlogPage() {
                 <h3 className="text-xl font-black uppercase tracking-tight text-foreground leading-tight group-hover:text-primary transition-colors">
                   {blog.title}
                 </h3>
-                
+
                 <p className="text-foreground/60 text-sm leading-relaxed font-light line-clamp-2">
                   {blog.excerpt}
                 </p>

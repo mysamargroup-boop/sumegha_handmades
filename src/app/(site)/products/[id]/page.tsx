@@ -25,11 +25,12 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
+import { getProductBySlug, getProductById, getAllProducts } from '@/sanity/lib/queries';
 
 const WhatsAppIcon = ({ className }: { className?: string }) => (
-  <svg 
-    viewBox="0 0 24 24" 
-    fill="currentColor" 
+  <svg
+    viewBox="0 0 24 24"
+    fill="currentColor"
     className={className}
     xmlns="http://www.w3.org/2000/svg"
   >
@@ -42,15 +43,49 @@ export default function ProductDetailPage({ params }: { params: Promise<{ id: st
   const { addToCart, addToWishlist, isWishlisted, removeFromWishlist } = useStore();
   const [currentSlide, setCurrentSlide] = useState(0);
   const [api, setApi] = useState<CarouselApi>();
-  
-  const product = useMemo(() => (productsData.products as Product[]).find(p => p.id === id), [id]);
-  
+
+  // Sanity data
+  const [sanityProduct, setSanityProduct] = useState<Product | null>(null);
+  const [sanityRelated, setSanityRelated] = useState<Product[] | null>(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    async function fetchSanityProduct() {
+      try {
+        let p = await getProductBySlug(id);
+        if (!p) p = await getProductById(id);
+
+        if (p) {
+          setSanityProduct(p);
+          // Try fetching related products if we found this product
+          const allP = await getAllProducts();
+          if (allP) {
+            setSanityRelated(allP.filter((rp: Product) => rp.id !== p?.id && rp.category === p?.category).slice(0, 4));
+          }
+        }
+      } catch (err) {
+        console.log("Sanity product fetch failed:", err);
+      } finally {
+        setLoading(false);
+      }
+    }
+    fetchSanityProduct();
+  }, [id]);
+
+  const fallbackProduct = useMemo(() => (productsData.products as Product[]).find(p => p.id === id), [id]);
+
+  const product = sanityProduct || fallbackProduct;
+
   useEffect(() => {
     if (!api) return;
     api.on("select", () => {
       setCurrentSlide(api.selectedScrollSnap());
     });
   }, [api]);
+
+  if (loading) {
+    return <div className="min-h-screen flex items-center justify-center"><div className="w-8 h-8 rounded-full border-2 border-primary border-t-transparent animate-spin"></div></div>;
+  }
 
   if (!product) {
     return (
@@ -64,18 +99,20 @@ export default function ProductDetailPage({ params }: { params: Promise<{ id: st
     );
   }
 
-  const discount = product.regular_price 
-    ? Math.round(((product.regular_price - product.sale_price) / product.regular_price) * 100) 
+  const discount = product.regular_price
+    ? Math.round(((product.regular_price - product.sale_price) / product.regular_price) * 100)
     : 0;
 
   const wishlisted = isWishlisted(product.id);
   const isFreeDelivery = product.sale_price >= 999;
 
-  const recommendedProducts = useMemo(() => 
-    (productsData.products as Product[])
-      .filter(p => p.id !== id && p.category === product.category)
-      .slice(0, 4),
-  [id, product.category]);
+  const recommendedProducts = sanityRelated && sanityRelated.length > 0
+    ? sanityRelated
+    : useMemo(() =>
+      (productsData.products as Product[])
+        .filter(p => p.id !== id && p.category === product.category)
+        .slice(0, 4),
+      [id, product.category]);
 
   const mockReviews = [
     { name: "Aditi S.", rating: 5, comment: "Absolutely stunning! The detail on this piece is even better in person.", date: "2 weeks ago" },
@@ -90,7 +127,7 @@ export default function ProductDetailPage({ params }: { params: Promise<{ id: st
           text: product.description,
           url: window.location.href,
         });
-      } catch (err) {}
+      } catch (err) { }
     } else {
       navigator.clipboard.writeText(window.location.href);
       toast({ title: "Link copied!" });
@@ -104,9 +141,11 @@ export default function ProductDetailPage({ params }: { params: Promise<{ id: st
 
   const galleryImages = [
     product.imageUrl,
-    `https://picsum.photos/seed/${product.id}2/800/1000`,
-    `https://picsum.photos/seed/${product.id}3/800/1000`
-  ];
+    ...(product.images && product.images.length > 0 ? product.images : [
+      `https://picsum.photos/seed/${product.id}2/800/1000`,
+      `https://picsum.photos/seed/${product.id}3/800/1000`
+    ])
+  ].filter(Boolean);
 
   const specifications = [
     { label: "Dimensions", value: product.dimensions || "Custom Size" },
@@ -135,12 +174,12 @@ export default function ProductDetailPage({ params }: { params: Promise<{ id: st
                   onClick={() => api?.scrollTo(idx)}
                   className={cn(
                     "relative aspect-[4/5] rounded-xl overflow-hidden border-2 transition-all duration-300",
-                    currentSlide === idx 
-                      ? "border-primary shadow-lg scale-105" 
+                    currentSlide === idx
+                      ? "border-primary shadow-lg scale-105"
                       : "border-transparent opacity-60 hover:opacity-100"
                   )}
                 >
-                  <Image src={img} alt={`${product.name} detail ${idx + 1}`} fill className="object-cover" />
+                  <Image src={img} alt={`${product.name} detail ${idx + 1}`} fill sizes="80px" className="object-cover" />
                 </button>
               ))}
             </div>
@@ -151,7 +190,7 @@ export default function ProductDetailPage({ params }: { params: Promise<{ id: st
                   {galleryImages.map((img, idx) => (
                     <CarouselItem key={idx}>
                       <div className="relative aspect-[4/5] rounded-[2rem] overflow-hidden shadow-2xl border-2 border-white bg-white w-full">
-                        <Image src={img} alt={product.name} fill className="object-cover" priority={idx === 0} />
+                        <Image src={img} alt={product.name} fill sizes="(max-width: 1024px) 100vw, 50vw" className="object-cover" priority={idx === 0} />
                         {idx === 0 && (
                           <div className="absolute top-4 left-4 z-10 flex flex-col gap-2">
                             {discount > 0 && (
@@ -187,7 +226,7 @@ export default function ProductDetailPage({ params }: { params: Promise<{ id: st
                   </div>
                   <span className="text-[10px] font-bold text-muted-foreground">({product.rating ? '24' : '0'} reviews)</span>
                 </div>
-                
+
                 <div className="flex items-center gap-2">
                   <Button size="icon" variant="outline" className={cn("h-10 w-10 rounded-full border-primary/10 transition-all", wishlisted ? 'bg-primary/10 text-primary border-primary/20' : 'bg-white hover:bg-primary/5')} onClick={() => wishlisted ? removeFromWishlist(product.id) : addToWishlist(product)}>
                     <Heart className={cn("h-4 w-4", wishlisted && "fill-primary text-primary")} />
@@ -264,11 +303,11 @@ export default function ProductDetailPage({ params }: { params: Promise<{ id: st
 
             <div className="space-y-4 w-full">
               <div className="flex gap-3 w-full">
-                <Button size="lg" variant="outline" className="h-14 lg:h-16 rounded-2xl text-[10px] font-bold uppercase tracking-widest border-primary text-primary hover:bg-primary/5 flex-1" onClick={() => {addToCart(product); toast({title: "Added to bag", description: product.name});}}>
+                <Button size="lg" variant="outline" className="h-14 lg:h-16 rounded-2xl text-[10px] font-bold uppercase tracking-widest border-primary text-primary hover:bg-primary/5 flex-1" onClick={() => { addToCart(product); toast({ title: "Added to bag", description: product.name }); }}>
                   <ShoppingCart className="h-4 w-4 mr-1.5" />
                   Add to Bag
                 </Button>
-                <Button size="lg" className="h-14 lg:h-16 rounded-2xl text-[10px] font-bold uppercase tracking-widest gradient-primary flex-1 shadow-lg shadow-primary/20" onClick={() => {addToCart(product); window.location.href = '/cart';}}>
+                <Button size="lg" className="h-14 lg:h-16 rounded-2xl text-[10px] font-bold uppercase tracking-widest gradient-primary flex-1 shadow-lg shadow-primary/20" onClick={() => { addToCart(product); window.location.href = '/cart'; }}>
                   <Zap className="h-4 w-4 mr-1.5" />
                   Buy Now
                 </Button>
@@ -332,7 +371,7 @@ export default function ProductDetailPage({ params }: { params: Promise<{ id: st
               <h2 className="text-2xl lg:text-3xl font-black font-headline tracking-tight uppercase">Recommended Pieces</h2>
             </div>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 lg:gap-8">
-              {recommendedProducts.map(p => <ProductCard key={p.id} product={p} />)}
+              {recommendedProducts.map((p, i) => <ProductCard key={p.id || i} product={p as any} />)}
             </div>
           </div>
         )}

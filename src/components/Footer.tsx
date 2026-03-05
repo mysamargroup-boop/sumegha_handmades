@@ -13,9 +13,9 @@ import {
 import categoriesData from "@/lib/categories.json";
 
 const WhatsAppIcon = ({ className }: { className?: string }) => (
-  <svg 
-    viewBox="0 0 24 24" 
-    fill="currentColor" 
+  <svg
+    viewBox="0 0 24 24"
+    fill="currentColor"
     className={className}
     xmlns="http://www.w3.org/2000/svg"
   >
@@ -79,8 +79,8 @@ export function Footer() {
               Experience new collections, limited drops, and exclusive releases.
             </p>
             <div className="flex flex-col sm:flex-row w-full gap-3 mt-4">
-              <Input 
-                className="bg-white/5 border-white/10 text-white placeholder:text-white/40 text-[10px] lg:text-sm font-display tracking-widest uppercase h-12 lg:h-14 rounded-xl flex-grow px-6 border focus:ring-primary/50" 
+              <Input
+                className="bg-white/5 border-white/10 text-white placeholder:text-white/40 text-[10px] lg:text-sm font-display tracking-widest uppercase h-12 lg:h-14 rounded-xl flex-grow px-6 border focus:ring-primary/50"
                 placeholder="Email Address"
                 type="email"
               />
@@ -89,7 +89,7 @@ export function Footer() {
               </Button>
             </div>
           </div>
-          
+
           <div className="flex flex-col items-center lg:items-end gap-10 w-full lg:w-auto">
             <div className="flex flex-wrap justify-center gap-6 lg:gap-8 items-center">
               <Link href="https://instagram.com/sumegha_handmades" target="_blank" className="text-white/40 hover:text-primary transition-all hover:scale-110">
@@ -127,15 +127,15 @@ export function Footer() {
             </div>
           </div>
         </div>
-        
-        <div className="hidden md:grid md:grid-cols-4 gap-12 py-12 border-t border-white/5 text-sm font-bold uppercase tracking-[0.3em] text-white/70 lg:pl-12">
+
+        <div className="hidden md:grid md:grid-cols-4 gap-12 py-12 border-t border-white/5 font-bold uppercase tracking-[0.3em] text-white/70 lg:pl-12">
           {footerData.map((section) => (
             <div key={section.title} className="space-y-6">
               <h4 className="text-white/30 text-[9px] lg:text-[10px] tracking-[0.5em] mb-4">{section.title}</h4>
               <ul className="space-y-4">
                 {section.links.map((link) => (
                   <li key={link.name}>
-                    <Link href={link.href} className="hover:text-primary transition-colors text-[11px] lg:text-sm">{link.name}</Link>
+                    <Link href={link.href} className="hover:text-primary transition-colors text-[10px] lg:text-[11px] tracking-widest">{link.name}</Link>
                   </li>
                 ))}
               </ul>
@@ -172,9 +172,9 @@ export function Footer() {
           </p>
           <div className="flex items-center gap-2 text-[10px] font-bold uppercase tracking-widest text-white/20">
             <span>•</span>
-            <Link 
-              href="https://instagram.com/shubham__nema" 
-              target="_blank" 
+            <Link
+              href="https://instagram.com/shubham__nema"
+              target="_blank"
               className="bg-clip-text text-transparent bg-gradient-to-r from-primary to-pink-400 hover:opacity-80 transition-opacity"
             >
               Designed by Samar
